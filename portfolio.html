@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="autuclef的作品集 — 产品设计、开源工具与研究项目">
+  <title>作品集 /   - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #3f87c7;
+      --hover-color: rgb(180, 16, 44);
+      --heading-color: rgb(180, 16, 44);
+      --tag-bg-color: #0076DF;
+      --text-color: #000;
+      --secondary-text: #555;
+      --footer-text: #777;
+      --highlight-bg: #f8f9fa;
+      --border-color: #e0e0e0;
+    }
+
+    /* Language Toggle */
+    [data-lang="en"] { display: none; }
+    body.en-mode [data-lang="cn"] { display: none; }
+    body.en-mode [data-lang="en"] { display: revert; }
+
+    /* Lang Switcher */
+    .lang-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #fff;
+      border: 2px solid var(--primary-color);
+      border-radius: 20px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .lang-btn {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      color: var(--primary-color);
+      cursor: pointer;
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 14px;
+      border-radius: 15px;
+      transition: all 0.3s;
+    }
+
+    .lang-btn:hover { background: rgba(23, 114, 208, 0.1); }
+    .lang-btn.active { background: var(--primary-color); color: #fff; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 0;
+      z-index: 999;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .navbar-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--hover-color); background: var(--highlight-bg); }
+    .nav-links a.active { color: var(--primary-color); font-weight: bold; }
+
+    /* Base */
+    body {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    a { color: var(--primary-color); text-decoration: none; }
+    a:hover { color: var(--hover-color); }
+
+    .main-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 20px 40px;
+    }
+
+    .page-heading {
+      font-size: 28px;
+      color: var(--heading-color);
+      font-weight: bold;
+      margin: 40px 0 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .page-intro {
+      color: var(--secondary-text);
+      margin-bottom: 30px;
+    }
+
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0 30px;
+      flex-wrap: wrap;
+    }
+
+    .category-tag {
+      padding: 8px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+      background: #fff;
+    }
+
+    .category-tag:hover,
+    .category-tag.active {
+      border-color: var(--primary-color);
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .portfolio-item {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s, opacity 0.25s;
+      background: #fff;
+    }
+
+    .portfolio-item:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+
+    .portfolio-item.hidden {
+      display: none;
+    }
+
+    .portfolio-image {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .portfolio-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .portfolio-content { padding: 20px; }
+
+    .portfolio-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+
+    .portfolio-category {
+      display: inline-block;
+      font-size: 11px;
+      color: #fff;
+      background-color: var(--tag-bg-color);
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    .portfolio-desc {
+      font-size: 14px;
+      color: var(--secondary-text);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .portfolio-links {
+      display: flex;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .portfolio-links a {
+      padding: 5px 10px;
+      border: 1px solid var(--primary-color);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .portfolio-links a:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--footer-text);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 13px; }
+      .lang-switcher { top: 12px; right: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="switchLang('cn', this)">中文</button>
+    <button class="lang-btn" onclick="switchLang('en', this)">EN</button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="nav-logo">autuclef </div>
+      <div class="nav-links">
+        <a href="index.html">
+          <span data-lang="cn">主页</span>
+          <span data-lang="en">Home</span>
+        </a>
+        <a href="portfolio.html" class="active">
+          <span data-lang="cn">作品集</span>
+          <span data-lang="en">Portfolio</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+
+    <h1 class="page-heading" data-lang="cn">作品集</h1>
+    <h1 class="page-heading" data-lang="en">Portfolio</h1>
+
+    <p class="page-intro" data-lang="cn">
+      我关注 AI、AI产品与计算社会科学，这里是我做过的产品设计、开源工具和研究项目。
+    </p>
+    <p class="page-intro" data-lang="en">
+      I work at the intersection of AI, content products, and computational social science. Here are my product designs, open-source tools, and research projects.
+    </p>
+
+    <!-- Category Filters -->
+    <div class="category-filter">
+      <span class="category-tag active" data-category="all" onclick="filterProjects('all', this)">
+        <span data-lang="cn">全部</span>
+        <span data-lang="en">All</span>
+      </span>
+      <span class="category-tag" data-category="product" onclick="filterProjects('product', this)">
+        <span data-lang="cn">产品设计</span>
+        <span data-lang="en">Product</span>
+      </span>
+      <span class="category-tag" data-category="opensource" onclick="filterProjects('opensource', this)">
+        <span data-lang="cn">开源项目</span>
+        <span data-lang="en">Open Source</span>
+      </span>
+      <span class="category-tag" data-category="research" onclick="filterProjects('research', this)">
+        <span data-lang="cn">研究项目</span>
+        <span data-lang="en">Research</span>
+      </span>
+      <span class="category-tag" data-category="content" onclick="filterProjects('content', this)">
+        <span data-lang="cn">内容创作</span>
+        <span data-lang="en">Content</span>
+      </span>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid">
+
+      <!-- 1. QQ 浏览器 AI 搜索 -->
+      <div class="portfolio-item" data-category="product">
+        <a href="projects/project-detail.html?project=tencent-ai-search" class="card-link">
+          <div class="portfolio-image" style="background: #8E9EAA;">
+            <span data-lang="cn">QQ 浏览器 AI 搜索</span>
+            <span data-lang="en">QQ Browser AI Search</span>
+          </div>
+        </a>
+        <div class="portfolio-content">
+          <span class="portfolio-category">
+            <span data-lang="cn">产品设计</span>
+            <span data-lang="en">Product</span>
+          </span>
+          <a href="projects/project-detail.html?project=tencent-ai-search" class="card-link">
+            <div class="portfolio-title">
+              <span data-lang="cn">QQ 浏览器 AI 搜索方案设计</span>
+              <span data-lang="en">QQ Browser AI Search Design</span>
+            </div>
+          </a>
+          <div class="portfolio-desc" data-lang="cn">
+            腾讯产品经理创造营项目。围绕"全网信息 + 个人腾讯文件"的融合搜索思路，完成 QQ 浏览器 AI 搜索功能方案，输出竞品分析、PRD 与 Figma 原型。
+          </div>
+          <div class="portfolio-desc" data-lang="en">
+            Tencent PM Camp project. Designed an AI search feature for QQ Browser combining web-wide retrieval with personal Tencent file search. Delivered competitive analysis, PRD, and Figma prototypes.
+          </div>
+          <div class="portfolio-links">
+            <a href="projects/project-detail.html?project=tencent-ai-search">
+              <span data-lang="cn">查看详情</span><span data-lang="en">Details</span>
+            </a>
+            <a href="#">Figma</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. OCR 文档处理工具 -->
+      <div class="portfolio-item" data-category="opensource">
+        <a href="projects/project-detail.html?project=ocr-document-tool" class="card-link">
+          <div class="portfolio-image" style="background: #C9B8A8;">
+            <span data-lang="cn">OCR 文档处理工具</span>
+            <span data-lang="en">OCR Document Tool</span>
+          </div>
+        </a>
+        <div class="portfolio-content">
+          <span class="portfolio-category">
+            <span data-lang="cn">开源项目</span>
+            <span data-lang="en">Open Source</span>
+          </span>
+          <a href="projects/project-detail.html?project=ocr-document-tool" class="card-link">
+            <div class="portfolio-title">
+              <span data-lang="cn">OCR 文档处理工具</span>
+              <span data-lang="en">OCR Document Tool</span>
+            </div>
+          </a>
+          <div class="portfolio-desc" data-lang="cn">
+            独立开发的 Web 文档处理工具，解决 PDF/EPUB 转文本的操作门槛问题。支持拖拽上传、OCR 识别与一键导出，已部署在 Streamlit Cloud。
+          </div>
+          <div class="portfolio-desc" data-lang="en">
+            A web-based document tool I built independently. Lowers the barrier of PDF/EPUB-to-text conversion with drag-and-drop upload, OCR, and one-click export. Deployed on Streamlit Cloud.
+          </div>
+          <div class="portfolio-links">
+            <a href="projects/project-detail.html?project=ocr-document-tool">
+              <span data-lang="cn">查看详情</span><span data-lang="en">Details</span>
+            </a>
+            <a href="https://github.com/clef233/pdf-epub-to-txt">GitHub</a>
+            <a href="https://pdf-epub-to-txt.streamlit.app/">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Neon-Gen -->
+      <div class="portfolio-item" data-category="opensource">
+        <a href="projects/project-detail.html?project=neon-gen" class="card-link">
+          <div class="portfolio-image" style="background: #9CAF88;">
+            <span data-lang="cn">Neon-Gen 数据合成工具</span>
+            <span data-lang="en">Neon-Gen Data Generator</span>
+          </div>
+        </a>
+        <div class="portfolio-content">
+          <span class="portfolio-category">
+            <span data-lang="cn">开源项目</span>
+            <span data-lang="en">Open Source</span>
+          </span>
+          <a href="projects/project-detail.html?project=neon-gen" class="card-link">
+            <div class="portfolio-title">
+              <span data-lang="cn">Neon-Gen 问卷数据合成工具</span>
+              <span data-lang="en">Neon-Gen Survey Data Generator</span>
+            </div>
+          </a>
+          <div class="portfolio-desc" data-lang="cn">
+            面向社科研究者的问卷数据合成工具，基于 CTGAN 生成保持原始分布特征的合成样本。小红书推广 3 天内获 5000+ 阅读、1000+ 点赞收藏。
+          </div>
+          <div class="portfolio-desc" data-lang="en">
+            A synthetic survey data generator for social science researchers, built on CTGAN. Gained 5,000+ reads and 1,000+ likes on Xiaohongshu within 3 days of launch.
+          </div>
+          <div class="portfolio-links">
+            </a>
+            <a href="https://github.com/clef233/Neon-Gen">GitHub</a>
+            <a href="https://neon-gen-ajmybve5pc69dvcnt8arvg.streamlit.app/">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. LoL BP 研究 -->
+      <div class="portfolio-item" data-category="research">
+        <a href="projects/project-detail.html?project=esports-strategy" class="card-link">
+          <div class="portfolio-image" style="background: #9e769e;">
+            <span data-lang="cn">电竞策略同构研究</span>
+            <span data-lang="en">Esports Strategy Isomorphism</span>
+          </div>
+        </a>
+        <div class="portfolio-content">
+          <span class="portfolio-category">
+            <span data-lang="cn">研究项目</span>
+            <span data-lang="en">Research</span>
+          </span>
+          <a href="projects/project-detail.html?project=esports-strategy" class="card-link">
+            <div class="portfolio-title">
+              <span data-lang="cn">LoL 职业联赛 BP 策略同构分析</span>
+              <span data-lang="en">LoL Pro League Draft Strategy Isomorphism Analysis</span>
+            </div>
+          </a>
+          <div class="portfolio-desc" data-lang="cn">
+            基于 LPL、LCK、LEC 2024 夏季赛数据，结合制度同构理论与 QCA 方法，分析职业战队 BP 策略同质化的多重因果路径。
+          </div>
+          <div class="portfolio-desc" data-lang="en">
+            Studied draft strategy convergence in professional LoL leagues (LPL/LCK/LEC 2024 Summer) through institutional isomorphism theory, using QCA to identify multiple causal pathways.
+          </div>
+          <div class="portfolio-links">
+            <a href="projects/project-detail.html?project=esports-strategy">
+              <span data-lang="cn">查看详情</span><span data-lang="en">Details</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. B站内容 -->
+      <div class="portfolio-item" data-category="content">
+        <a href="https://space.bilibili.com/245799950" class="card-link" target="_blank" rel="noopener">
+          <div class="portfolio-image" style="background: #63938f;">
+            <span data-lang="cn">人文社科科普</span>
+            <span data-lang="en">Social Science Content</span>
+          </div>
+        </a>
+        <div class="portfolio-content">
+          <span class="portfolio-category">
+            <span data-lang="cn">内容创作</span>
+            <span data-lang="en">Content</span>
+          </span>
+          <div class="portfolio-title">
+            <span data-lang="cn">人文社科科普自媒体「血橙橙橙橙」</span>
+            <span data-lang="en">Social Science Channel "Xue Cheng"</span>
+          </div>
+          <div class="portfolio-desc" data-lang="cn">
+            运营人文社科科普账号，制作社会学、人类学方向的知识科普视频。粉丝 2 万+，累计播放近 100 万。负责选题策划、脚本撰写与发布节奏优化。
+          </div>
+          <div class="portfolio-desc" data-lang="en">
+            Operated a humanities and social science channel on Bilibili with explainer videos on sociology and anthropology. 20,000+ followers, ~1M total views. Responsible for topic planning, scriptwriting, and publishing optimization.
+          </div>
+          <div class="portfolio-links">
+            <a href="https://space.bilibili.com/245799950" target="_blank" rel="noopener">Bilibili</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. 话语极化信息论测量 -->
+      <div class="portfolio-item" data-category="research">
+        <a href="projects/project-detail.html?project=discourse-polarization" class="card-link">
+          <div class="portfolio-image" style="background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);">
+            <span data-lang="cn">话语极化的计算测量</span>
+            <span data-lang="en">Computational Measurement of Discursive Polarization，llm based</span>
+          </div>
+        </a>
+        <div class="portfolio-content">
+          <span class="portfolio-category">
+            <span data-lang="cn">研究项目 · 论文撰写中</span>
+            <span data-lang="en">Research · Paper in Progress</span>
+          </span>
+          <a href="projects/project-detail.html?project=discourse-polarization" class="card-link">
+            <div class="portfolio-title">
+              <span data-lang="cn">党派身份能预测多少政治语言？</span>
+              <span data-lang="en">How Much Political Speech Can Party Identity Predict?</span>
+            </div>
+          </a>
+          <div class="portfolio-desc" data-lang="cn">
+            用信息论的方法衡量美国国会的话语极化程度。对 1873—2024 年超过 1 亿条国会发言记录训练条件语言模型并进行分析，追踪其 150 年的历时变化。
+          </div>
+          <div class="portfolio-desc" data-lang="en">
+            Measuring discursive polarization in the U.S. Congress with information theory. Trained conditional language models on 100M+ congressional speech records (1873–2024) to quantify how much more predictable speech becomes when party identity is known — tracking the strength of partisan discursive boundaries over 150 years.
+          </div>
+          <div class="portfolio-links">
+            </a>
+            <a href="#">
+              <span data-lang="cn">arxiv预印本（即将发布）</span><span data-lang="en">Preprint (Coming)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        <span data-lang="cn">© 2026 autuclef</span>
+        <span data-lang="en">© 2026 autuclef</span>
+      </p>
+      <p style="margin-top: 8px; font-size: 12px;">
+        <span data-lang="cn">设计参考</span>
+        <span data-lang="en">Design inspired by</span>
+        <a href="https://jonbarron.info/">Jon Barron</a>
+        ·
+        <span data-lang="cn">特别感谢我的朋友</span>
+        <span data-lang="en">Thanks to my friend</span>
+        <a href="https://www.yichenggu.com/">Yicheng Gu</a>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function switchLang(lang, btn) {
+      document.body.className = lang === 'en' ? 'en-mode' : '';
+      document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.title = lang === 'en' ? 'autuclef - Portfolio' : '作品集';
+      document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+    }
+
+    function filterProjects(category, activeTag) {
+      document.querySelectorAll('.category-tag').forEach(function(t) { t.classList.remove('active'); });
+      activeTag.classList.add('active');
+      document.querySelectorAll('.portfolio-item').forEach(function(item) {
+        var show = category === 'all' || item.dataset.category === category;
+        item.classList.toggle('hidden', !show);
+      });
+    }
+  </script>
+
+</body>
+</html>

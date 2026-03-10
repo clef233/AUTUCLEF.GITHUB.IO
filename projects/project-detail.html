@@ -1,0 +1,1192 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title id="page-title">Project Detail</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style type="text/css">
+    :root {
+      --primary-color: #1772d0;
+      --hover-color: rgb(180, 16, 44);
+      --heading-color: rgb(180, 16, 44);
+      --tag-bg-color: #0076DF;
+      --text-color: #000000;
+      --secondary-text: #555555;
+      --footer-text: #777;
+      --highlight-bg: #f8f9fa;
+      --border-color: #e0e0e0;
+      --success-color: #28a745;
+      --warning-color: #ffc107;
+      --card-bg: #ffffff;
+      --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-color);
+      background: #f5f5f5;
+    }
+
+    .lang-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: white;
+      border: 2px solid var(--primary-color);
+      border-radius: 20px;
+      padding: 5px;
+      box-shadow: var(--shadow);
+    }
+
+    .lang-btn {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: var(--primary-color);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn:hover { background: rgba(23, 114, 208, 0.1); }
+    .lang-btn.active { background: var(--primary-color); color: white; }
+
+    body:not(.en-mode) .lang-en { display: none !important; }
+    body.en-mode .lang-cn { display: none !important; }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 0;
+      z-index: 999;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .navbar-content {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--heading-color);
+    }
+
+    .nav-links { display: flex; gap: 20px; }
+
+    .nav-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover { color: var(--hover-color); text-decoration: underline; }
+
+    .main-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 20px 40px;
+    }
+
+    .project-header {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--heading-color);
+    }
+
+    .project-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--heading-color);
+      margin: 0 0 15px 0;
+      line-height: 1.3;
+    }
+
+    .project-subtitle {
+      font-size: 18px;
+      color: var(--secondary-text);
+      margin-bottom: 20px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 14px;
+      color: var(--secondary-text);
+    }
+
+    .meta-item { display: flex; align-items: center; gap: 5px; }
+    .meta-label { font-weight: bold; color: var(--text-color); }
+
+    .content-section {
+      background: white;
+      border-radius: 12px;
+      padding: 30px 40px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--heading-color);
+      margin: 0 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .section-content { font-size: 15px; line-height: 1.8; }
+    .section-content p { margin: 0 0 15px 0; }
+    .section-content ul, .section-content ol { margin: 15px 0; padding-left: 25px; }
+    .section-content li { margin-bottom: 8px; }
+    .section-content h3 { color: var(--heading-color); font-size: 18px; margin: 25px 0 15px 0; }
+    .section-content h4 { color: var(--text-color); font-size: 16px; margin: 20px 0 10px 0; }
+    .section-content strong { color: var(--heading-color); }
+    .section-content blockquote {
+      border-left: 4px solid var(--primary-color);
+      margin: 20px 0;
+      padding: 15px 20px;
+      background: var(--highlight-bg);
+      font-style: italic;
+    }
+
+    .documents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .document-card {
+      background: var(--highlight-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .document-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-color: var(--primary-color);
+    }
+
+    .document-card.status-pending { opacity: 0.6; cursor: not-allowed; }
+    .document-card.status-pending:hover { transform: none; box-shadow: none; }
+
+    .doc-icon { font-size: 36px; margin-bottom: 10px; }
+    .doc-title { font-weight: bold; color: var(--text-color); margin-bottom: 5px; }
+    .doc-desc { font-size: 13px; color: var(--secondary-text); }
+
+    .doc-status {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: var(--warning-color);
+      color: #000;
+    }
+
+    .doc-status.ready { background: var(--success-color); color: white; }
+
+    /* PDF Viewer */
+    .pdf-viewer {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .pdf-viewer.active { display: block; }
+
+    .pdf-toolbar {
+      background: var(--highlight-bg);
+      padding: 10px 15px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pdf-title { font-weight: bold; color: var(--text-color); }
+
+    .pdf-close {
+      background: none;
+      border: none;
+      color: var(--secondary-text);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 5px;
+    }
+
+    .pdf-close:hover { color: var(--hover-color); }
+    .pdf-iframe { width: 100%; height: 600px; border: none; }
+
+    /* CHANGED: Markdown Viewer */
+    .md-viewer {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .md-viewer.active { display: block; }
+
+    .md-toolbar {
+      background: var(--highlight-bg);
+      padding: 10px 15px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .md-toolbar-title { font-weight: bold; color: var(--text-color); }
+
+    .md-close {
+      background: none;
+      border: none;
+      color: var(--secondary-text);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 5px;
+    }
+
+    .md-close:hover { color: var(--hover-color); }
+
+    .md-body {
+      padding: 30px 40px;
+      max-height: 700px;
+      overflow-y: auto;
+      background: #fff;
+      color: var(--text-color);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .md-body h1 {
+      font-size: 26px;
+      color: var(--heading-color);
+      margin: 30px 0 15px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .md-body h2 {
+      font-size: 22px;
+      color: var(--heading-color);
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .md-body h3 {
+      font-size: 18px;
+      color: var(--heading-color);
+      margin: 24px 0 10px;
+    }
+
+    .md-body h4 {
+      font-size: 16px;
+      color: var(--text-color);
+      margin: 20px 0 8px;
+    }
+
+    .md-body p { margin: 0 0 14px; }
+    .md-body ul, .md-body ol { margin: 12px 0; padding-left: 24px; }
+    .md-body li { margin-bottom: 6px; }
+    .md-body strong { color: var(--heading-color); }
+
+    .md-body blockquote {
+      border-left: 4px solid var(--primary-color);
+      margin: 16px 0;
+      padding: 12px 20px;
+      background: var(--highlight-bg);
+      color: var(--secondary-text);
+    }
+
+    .md-body blockquote p { margin: 0; }
+
+    .md-body code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+
+    .md-body pre {
+      background: #f6f8fa;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .md-body pre code {
+      background: none;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .md-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .md-body thead { background: var(--highlight-bg); }
+
+    .md-body th, .md-body td {
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .md-body th { font-weight: bold; color: var(--text-color); }
+    .md-body tr:nth-child(even) { background: #fafafa; }
+
+    .md-body hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 30px 0;
+    }
+
+    .md-body a { color: var(--primary-color); text-decoration: none; }
+    .md-body a:hover { color: var(--hover-color); text-decoration: underline; }
+
+    .md-body img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 12px 0;
+    }
+    /* END CHANGED */
+
+    .timeline { position: relative; padding-left: 30px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .timeline-item { position: relative; margin-bottom: 25px; padding-left: 20px; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--primary-color);
+    }
+
+    .timeline-item.milestone::before {
+      background: var(--heading-color);
+      box-shadow: 0 0 0 2px var(--heading-color);
+      width: 16px;
+      height: 16px;
+      left: -28px;
+    }
+
+    .timeline-date { font-size: 14px; color: var(--primary-color); font-weight: bold; margin-bottom: 5px; }
+    .timeline-content { font-size: 15px; line-height: 1.6; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--tag-bg-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .tag.level-advanced { background: #28a745; }
+    .tag.level-intermediate { background: #0076DF; }
+    .tag.level-basic { background: #6c757d; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
+
+    .gallery-caption {
+      padding: 12px;
+      background: var(--highlight-bg);
+      font-size: 13px;
+      color: var(--secondary-text);
+      text-align: center;
+    }
+
+    .action-links { display: flex; flex-wrap: wrap; gap: 15px; }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn:hover { background: var(--hover-color); transform: translateY(-2px); }
+
+    .action-btn.secondary {
+      background: white;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .action-btn.secondary:hover { background: var(--primary-color); color: white; }
+
+    .error-message {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .error-message .icon { font-size: 64px; margin-bottom: 20px; }
+    .error-message h2 { color: var(--heading-color); margin-bottom: 15px; }
+    .error-message p { color: var(--secondary-text); margin-bottom: 25px; }
+
+    .footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--footer-text);
+      font-size: 13px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .project-header { padding: 25px; }
+      .project-title { font-size: 24px; }
+      .content-section { padding: 25px; }
+      .documents-grid { grid-template-columns: 1fr; }
+      .pdf-iframe { height: 400px; }
+      .md-body { padding: 20px; max-height: 500px; }
+      .md-body table { font-size: 12px; }
+      .md-body th, .md-body td { padding: 6px 8px; }
+      .lang-switcher { top: 10px; right: 10px; }
+      .navbar { padding: 10px 0; }
+      .nav-logo { font-size: 16px; }
+      .nav-links { gap: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="switchLang('cn')">中文</button>
+    <button class="lang-btn" onclick="switchLang('en')">EN</button>
+  </div>
+
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="nav-logo">
+        <span class="lang-cn">唐盾 · 作品集</span>
+        <span class="lang-en">Tang Dun · Portfolio</span>
+      </div>
+      <div class="nav-links">
+        <a href="../portfolio.html" class="nav-link">
+          <span class="lang-cn">返回作品集</span>
+          <span class="lang-en">Back to Portfolio</span>
+        </a>
+        <a href="../index.html" class="nav-link">
+          <span class="lang-cn">主页</span>
+          <span class="lang-en">Home</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div id="loading-state" class="content-section" style="text-align: center; padding: 60px;">
+      <div style="font-size: 48px; margin-bottom: 20px;">⏳</div>
+      <h2>
+        <span class="lang-cn">正在加载项目...</span>
+        <span class="lang-en">Loading project...</span>
+      </h2>
+    </div>
+
+    <div id="error-state" class="error-message" style="display: none;">
+      <div class="icon">📄</div>
+      <h2>
+        <span class="lang-cn">项目未找到</span>
+        <span class="lang-en">Project Not Found</span>
+      </h2>
+      <p>
+        <span class="lang-cn">未找到指定的项目文件。请检查URL参数是否正确。</span>
+        <span class="lang-en">The specified project file was not found. Please check if the URL parameter is correct.</span>
+      </p>
+      <a href="../portfolio.html" class="action-btn">
+        <span class="lang-cn">返回作品集</span>
+        <span class="lang-en">Back to Portfolio</span>
+      </a>
+    </div>
+
+    <div id="project-content" style="display: none;">
+      <header class="project-header">
+        <h1 class="project-title">
+          <span id="title-cn" class="lang-cn"></span>
+          <span id="title-en" class="lang-en"></span>
+        </h1>
+        <div class="project-subtitle">
+          <span id="subtitle-cn" class="lang-cn"></span>
+          <span id="subtitle-en" class="lang-en"></span>
+        </div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label lang-cn">时间：</span>
+            <span class="meta-label lang-en">Time:</span>
+            <span id="project-time"></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label lang-cn">类型：</span>
+            <span class="meta-label lang-en">Type:</span>
+            <span id="project-type"></span>
+          </div>
+          <div class="meta-item" id="role-container">
+            <span class="meta-label lang-cn">角色：</span>
+            <span class="meta-label lang-en">Role:</span>
+            <span id="project-role"></span>
+          </div>
+        </div>
+      </header>
+
+      <section class="content-section">
+        <h2 class="section-title">
+          <span class="lang-cn"> 项目概述</span>
+          <span class="lang-en"> Project Overview</span>
+        </h2>
+        <div id="overview-content" class="section-content"></div>
+      </section>
+
+      <!-- CHANGED: Added md-viewer alongside pdf-viewer -->
+      <section class="content-section">
+        <h2 class="section-title">
+          <span class="lang-cn">📁 项目文档</span>
+          <span class="lang-en">📁 Documents</span>
+        </h2>
+        <div id="documents-grid" class="documents-grid"></div>
+        <div id="pdf-viewer" class="pdf-viewer">
+          <div class="pdf-toolbar">
+            <span id="pdf-title" class="pdf-title"></span>
+            <button class="pdf-close" onclick="closePDF()">✕</button>
+          </div>
+          <iframe id="pdf-iframe" class="pdf-iframe"></iframe>
+        </div>
+        <div id="md-viewer" class="md-viewer">
+          <div class="md-toolbar">
+            <span id="md-title" class="md-toolbar-title"></span>
+            <button class="md-close" onclick="closeMD()">✕</button>
+          </div>
+          <div id="md-body" class="md-body"></div>
+        </div>
+      </section>
+
+      <section id="gallery-section" class="content-section" style="display: none;">
+        <h2 class="section-title">
+          <span class="lang-cn">🎨 设计展示</span>
+          <span class="lang-en">🎨 Design Gallery</span>
+        </h2>
+        <div id="gallery-grid" class="gallery-grid"></div>
+      </section>
+
+      <section class="content-section">
+        <h2 class="section-title">
+          <span class="lang-cn">⏱️ 项目时间线</span>
+          <span class="lang-en">⏱️ Timeline</span>
+        </h2>
+        <div id="timeline-content" class="timeline"></div>
+      </section>
+
+      <section class="content-section">
+        <h2 class="section-title">
+          <span class="lang-cn">🛠️ 技能标签</span>
+          <span class="lang-en">🛠️ Skills</span>
+        </h2>
+        <div id="skills-content" class="tag-list"></div>
+      </section>
+
+      <section id="links-section" class="content-section" style="display: none;">
+        <h2 class="section-title">
+          <span class="lang-cn">🔗 相关链接</span>
+          <span class="lang-en">🔗 Links</span>
+        </h2>
+        <div id="links-content" class="action-links"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p class="lang-cn">© 2024-2026 唐盾 · 保留所有权利</p>
+    <p class="lang-en">© 2024-2026 Tang Dun · All Rights Reserved</p>
+  </footer>
+
+  <script>
+    var CONFIG = {
+      contentPath: './content/',
+      defaultLang: 'cn'
+    };
+
+    function switchLang(lang, e) {
+      var event = e || window.event;
+      document.body.className = lang === 'en' ? 'en-mode' : '';
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
+      localStorage.setItem('preferred-lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var savedLang = localStorage.getItem('preferred-lang');
+      if (savedLang === 'en') {
+        document.body.className = 'en-mode';
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.remove('active');
+          if (btn.textContent === 'EN') btn.classList.add('active');
+        });
+      } else {
+        document.body.className = '';
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.classList.remove('active');
+          if (btn.textContent === '中文') btn.classList.add('active');
+        });
+      }
+    });
+
+    function getProjectId() {
+      var params = new URLSearchParams(window.location.search);
+      return params.get('project');
+    }
+
+    function parseFrontMatter(content) {
+      var frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+      var match = content.match(frontMatterRegex);
+
+      if (match) {
+        var frontMatter = match[1];
+        var body = match[2];
+        var data = {};
+        var currentArray = null;
+        var currentArrayKey = null;
+        var lines = frontMatter.split('\n');
+
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i];
+          var trimmedLine = line.trim();
+          if (!trimmedLine) continue;
+          var indent = line.length - line.trimStart().length;
+
+          if (indent === 0 && trimmedLine.includes(':')) {
+            var colonIndex = trimmedLine.indexOf(':');
+            var key = trimmedLine.substring(0, colonIndex).trim();
+            var value = trimmedLine.substring(colonIndex + 1).trim();
+
+            if (value === '' || value === '[]') {
+              var nextLine = lines[i + 1];
+              if (nextLine && nextLine.trim().startsWith('- ')) {
+                data[key] = [];
+                currentArray = data[key];
+                currentArrayKey = key;
+                continue;
+              }
+            }
+
+            if (value.startsWith('[') && value.endsWith(']')) {
+              value = value.slice(1, -1).split(',').map(function(v) { return v.trim().replace(/["']/g, ''); });
+            } else if ((value.startsWith('"') && value.endsWith('"')) ||
+                       (value.startsWith("'") && value.endsWith("'"))) {
+              value = value.slice(1, -1);
+            }
+
+            data[key] = value;
+            currentArray = null;
+            currentArrayKey = null;
+          } else if (trimmedLine.startsWith('- ') && currentArray !== null) {
+            var itemContent = trimmedLine.substring(2).trim();
+            if (itemContent.includes(':')) {
+              var newObj = {};
+              var cIdx = itemContent.indexOf(':');
+              var k = itemContent.substring(0, cIdx).trim();
+              var v = itemContent.substring(cIdx + 1).trim();
+              if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+                v = v.slice(1, -1);
+              }
+              newObj[k] = v;
+              currentArray.push(newObj);
+            } else {
+              currentArray.push(itemContent.replace(/["']/g, ''));
+            }
+          } else if (currentArray !== null && currentArray.length > 0 && indent > 0 && trimmedLine.includes(':')) {
+            var cIdx2 = trimmedLine.indexOf(':');
+            var k2 = trimmedLine.substring(0, cIdx2).trim();
+            var v2 = trimmedLine.substring(cIdx2 + 1).trim();
+            if ((v2.startsWith('"') && v2.endsWith('"')) || (v2.startsWith("'") && v2.endsWith("'"))) {
+              v2 = v2.slice(1, -1);
+            }
+            currentArray[currentArray.length - 1][k2] = v2;
+          }
+        }
+
+        return { data: data, body: body };
+      }
+
+      return { data: {}, body: content };
+    }
+
+    function parseMarkdownSections(body) {
+      var sections = {
+        overviewCn: '', overviewEn: '',
+        documentsCn: '', documentsEn: '',
+        timelineCn: '', timelineEn: '',
+        skillsCn: '', skillsEn: '',
+        galleryCn: '', galleryEn: '',
+        linksCn: '', linksEn: ''
+      };
+      var lines = body.split('\n');
+      var currentSection = 'overviewCn';
+      var currentContent = [];
+
+      var sectionMap = {
+        '## 项目概述': 'overviewCn',
+        '## Project Overview': 'overviewEn',
+        '## 文档清单': 'documentsCn',
+        '## Documents': 'documentsEn',
+        '## 时间线': 'timelineCn',
+        '## Timeline': 'timelineEn',
+        '## 技能标签': 'skillsCn',
+        '## Skills': 'skillsEn',
+        '## 设计展示': 'galleryCn',
+        '## Gallery': 'galleryEn',
+        '## 相关链接': 'linksCn',
+        '## Links': 'linksEn'
+      };
+
+      lines.forEach(function(line) {
+        var trimmed = line.trim();
+        if (sectionMap.hasOwnProperty(trimmed)) {
+          if (currentContent.length > 0) {
+            sections[currentSection] = currentContent.join('\n');
+          }
+          currentSection = sectionMap[trimmed];
+          currentContent = [];
+        } else {
+          currentContent.push(line);
+        }
+      });
+
+      if (currentContent.length > 0) {
+        sections[currentSection] = currentContent.join('\n');
+      }
+
+      sections.overview = sections.overviewCn || sections.overviewEn;
+      sections.timeline = sections.timelineCn || sections.timelineEn;
+      sections.skills = sections.skillsCn || sections.skillsEn;
+      sections.gallery = sections.galleryCn || sections.galleryEn;
+      sections.links = sections.linksCn || sections.linksEn;
+
+      return sections;
+    }
+
+    // ============================================
+    // CHANGED: Document viewer logic
+    // ============================================
+    function isMarkdownFile(filepath) {
+      return filepath && filepath.toLowerCase().endsWith('.md');
+    }
+
+    function openDocument(file, title) {
+      closePDF();
+      closeMD();
+      if (isMarkdownFile(file)) {
+        openMD(file, title);
+      } else {
+        openPDF(file, title);
+      }
+    }
+
+    function openPDF(file, title) {
+      var viewer = document.getElementById('pdf-viewer');
+      var iframe = document.getElementById('pdf-iframe');
+      var titleEl = document.getElementById('pdf-title');
+      iframe.src = file;
+      titleEl.textContent = title || 'Document';
+      viewer.classList.add('active');
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closePDF() {
+      var viewer = document.getElementById('pdf-viewer');
+      var iframe = document.getElementById('pdf-iframe');
+      viewer.classList.remove('active');
+      iframe.src = '';
+    }
+
+    async function openMD(file, title) {
+      var viewer = document.getElementById('md-viewer');
+      var body = document.getElementById('md-body');
+      var titleEl = document.getElementById('md-title');
+
+      titleEl.textContent = title || 'Document';
+      body.innerHTML = '<p style="text-align:center;color:#999;">Loading...</p>';
+      viewer.classList.add('active');
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      try {
+        var response = await fetch(file);
+        if (!response.ok) throw new Error('Failed to load');
+        var text = await response.text();
+
+        // Strip YAML front matter if present
+        var content = text;
+        var fmMatch = text.match(/^---\s*\n[\s\S]*?\n---\s*\n([\s\S]*)$/);
+        if (fmMatch) {
+          content = fmMatch[1];
+        }
+
+        body.innerHTML = marked.parse(content);
+      } catch (err) {
+        body.innerHTML = '<p style="text-align:center;color:#c00;">Failed to load document.</p>';
+      }
+    }
+
+    function closeMD() {
+      var viewer = document.getElementById('md-viewer');
+      var body = document.getElementById('md-body');
+      viewer.classList.remove('active');
+      body.innerHTML = '';
+    }
+
+    var DOC_TYPES = {
+      'prd': { icon: '📋', nameCn: 'PRD文档', nameEn: 'PRD Document' },
+      'competitive': { icon: '🔍', nameCn: '竞品分析', nameEn: 'Competitive Analysis' },
+      'prototype': { icon: '🎨', nameCn: '原型设计', nameEn: 'Prototype' },
+      'architecture': { icon: '🗺️', nameCn: '思维导图', nameEn: 'Architecture' },
+      'metrics': { icon: '📊', nameCn: '数据报告', nameEn: 'Metrics Report' },
+      'research': { icon: '👥', nameCn: '用户调研', nameEn: 'User Research' },
+      'paper': { icon: '📄', nameCn: '论文', nameEn: 'Paper' },
+      'thesis': { icon: '📚', nameCn: '毕业论文', nameEn: 'Thesis' },
+      'presentation': { icon: '📽️', nameCn: '演示文稿', nameEn: 'Presentation' },
+      'head': { icon: '📑', nameCn: '项目简介', nameEn: 'Project Brief' }
+    };
+
+    // CHANGED: renderDocuments now calls openDocument instead of openPDF
+    function renderDocuments(documents) {
+      var grid = document.getElementById('documents-grid');
+      grid.innerHTML = '';
+
+      documents.forEach(function(doc) {
+        var type = DOC_TYPES[doc.type] || { icon: '📄', nameCn: '文档', nameEn: 'Document' };
+        var isReady = doc.status === 'ready';
+
+        var card = document.createElement('div');
+        card.className = 'document-card ' + (isReady ? '' : 'status-pending');
+
+        if (isReady) {
+          (function(docFile, docTitle) {
+            card.onclick = function() {
+              openDocument(docFile, docTitle);
+            };
+          })(doc.file, doc.titleCn || doc.title);
+        }
+
+        card.innerHTML =
+          '<span class="doc-status ' + (isReady ? 'ready' : '') + '">' + (isReady ? '✓' : '⏳') + '</span>' +
+          '<div class="doc-icon">' + type.icon + '</div>' +
+          '<div class="doc-title">' +
+            '<span class="lang-cn">' + (doc.titleCn || type.nameCn) + '</span>' +
+            '<span class="lang-en">' + (doc.titleEn || type.nameEn) + '</span>' +
+          '</div>' +
+          '<div class="doc-desc">' +
+            '<span class="lang-cn">' + (doc.descCn || (isReady ? '点击查看' : '待上传')) + '</span>' +
+            '<span class="lang-en">' + (doc.descEn || (isReady ? 'Click to view' : 'Coming soon')) + '</span>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+    }
+    // END CHANGED
+
+    function renderTimelineItems(timelineMarkdown, container) {
+      var items = timelineMarkdown.split('\n').filter(function(line) { return line.trim().startsWith('-'); });
+      items.forEach(function(item) {
+        var match = item.match(/- \*\*(.+?)\*\*:\s*(.+)/);
+        if (match) {
+          var div = document.createElement('div');
+          div.className = 'timeline-item';
+          div.innerHTML =
+            '<div class="timeline-date">' + match[1] + '</div>' +
+            '<div class="timeline-content">' + marked.parseInline(match[2]) + '</div>';
+          container.appendChild(div);
+        }
+      });
+    }
+
+    function renderSkillItems(skillsMarkdown, container) {
+      var skills = skillsMarkdown.split('\n')
+        .filter(function(line) { return line.trim().startsWith('-'); })
+        .map(function(line) { return line.replace(/^-\s*/, '').trim(); });
+
+      skills.forEach(function(skill) {
+        var levelClass = '';
+        var skillName = skill;
+
+        if (skill.includes('【精通】') || skill.includes('[Advanced]')) {
+          levelClass = 'level-advanced';
+          skillName = skill.replace(/【精通】|\[Advanced\]/g, '').trim();
+        } else if (skill.includes('【良好】') || skill.includes('[Intermediate]')) {
+          levelClass = 'level-intermediate';
+          skillName = skill.replace(/【良好】|\[Intermediate\]/g, '').trim();
+        } else if (skill.includes('【一般】') || skill.includes('[Basic]')) {
+          levelClass = 'level-basic';
+          skillName = skill.replace(/【一般】|\[Basic\]/g, '').trim();
+        }
+
+        var tag = document.createElement('span');
+        tag.className = 'tag ' + levelClass;
+        tag.textContent = skillName;
+        container.appendChild(tag);
+      });
+    }
+
+    function renderGalleryItems(galleryMarkdown, container) {
+      var items = galleryMarkdown.split('\n').filter(function(line) { return line.trim().startsWith('-'); });
+      items.forEach(function(item) {
+        var match = item.match(/- \[(.+?)\]\((.+?)\)/);
+        if (match) {
+          var div = document.createElement('div');
+          div.className = 'gallery-item';
+          div.onclick = function() { window.open(match[2], '_blank'); };
+          div.innerHTML =
+            '<img src="' + match[2] + '" alt="' + match[1] + '" loading="lazy">' +
+            '<div class="gallery-caption">' + match[1] + '</div>';
+          container.appendChild(div);
+        }
+      });
+    }
+
+    function renderLinkItems(linksMarkdown, container) {
+      var links = linksMarkdown.split('\n').filter(function(line) { return line.trim().startsWith('-'); });
+      links.forEach(function(link) {
+        var match = link.match(/- \[(.+?)\]\((.+?)\)/);
+        if (match) {
+          var a = document.createElement('a');
+          a.href = match[2];
+          a.target = '_blank';
+          a.className = 'action-btn secondary';
+          a.innerHTML = '🔗 ' + match[1];
+          container.appendChild(a);
+        }
+      });
+    }
+
+    async function loadProject() {
+      var projectId = getProjectId();
+      if (!projectId) { showError(); return; }
+
+      try {
+        var response = await fetch(CONFIG.contentPath + projectId + '.md');
+        if (!response.ok) throw new Error('Project not found');
+
+        var content = await response.text();
+        var parsed = parseFrontMatter(content);
+        var data = parsed.data;
+        var body = parsed.body;
+        var sections = parseMarkdownSections(body);
+
+        document.getElementById('page-title').textContent = (data.titleCn || data.title) + ' - Project Detail';
+        document.getElementById('title-cn').textContent = data.titleCn || data.title;
+        document.getElementById('title-en').textContent = data.titleEn || data.title;
+        document.getElementById('subtitle-cn').textContent = data.subtitleCn || '';
+        document.getElementById('subtitle-en').textContent = data.subtitleEn || '';
+        document.getElementById('project-time').textContent = data.time || '';
+
+        var typeCn = data.typeCn || data.type;
+        var typeEn = data.typeEn || data.type;
+        document.getElementById('project-type').innerHTML =
+          '<span class="lang-cn">' + typeCn + '</span><span class="lang-en">' + typeEn + '</span>';
+
+        if (data.roleCn || data.role) {
+          var roleCn = data.roleCn || data.role;
+          var roleEn = data.roleEn || data.role;
+          document.getElementById('project-role').innerHTML =
+            '<span class="lang-cn">' + roleCn + '</span><span class="lang-en">' + roleEn + '</span>';
+        } else {
+          document.getElementById('role-container').style.display = 'none';
+        }
+
+        var overviewContent = document.getElementById('overview-content');
+        if (sections.overviewCn || sections.overviewEn) {
+          overviewContent.innerHTML =
+            '<div class="lang-cn">' + (sections.overviewCn ? marked.parse(sections.overviewCn) : '') + '</div>' +
+            '<div class="lang-en">' + (sections.overviewEn ? marked.parse(sections.overviewEn) : '') + '</div>';
+        }
+
+        if (data.documents) { renderDocuments(data.documents); }
+
+        var timelineContent = document.getElementById('timeline-content');
+        if (sections.timelineCn || sections.timelineEn) {
+          timelineContent.innerHTML = '';
+          if (sections.timelineCn) {
+            var cnDiv = document.createElement('div');
+            cnDiv.className = 'lang-cn';
+            renderTimelineItems(sections.timelineCn, cnDiv);
+            timelineContent.appendChild(cnDiv);
+          }
+          if (sections.timelineEn) {
+            var enDiv = document.createElement('div');
+            enDiv.className = 'lang-en';
+            renderTimelineItems(sections.timelineEn, enDiv);
+            timelineContent.appendChild(enDiv);
+          }
+        }
+
+        var skillsContent = document.getElementById('skills-content');
+        if (sections.skillsCn || sections.skillsEn) {
+          skillsContent.innerHTML = '';
+          if (sections.skillsCn) {
+            var cnDiv2 = document.createElement('div');
+            cnDiv2.className = 'lang-cn';
+            renderSkillItems(sections.skillsCn, cnDiv2);
+            skillsContent.appendChild(cnDiv2);
+          }
+          if (sections.skillsEn) {
+            var enDiv2 = document.createElement('div');
+            enDiv2.className = 'lang-en';
+            renderSkillItems(sections.skillsEn, enDiv2);
+            skillsContent.appendChild(enDiv2);
+          }
+        }
+
+        if (sections.galleryCn || sections.galleryEn) {
+          var gallerySection = document.getElementById('gallery-section');
+          var galleryGrid = document.getElementById('gallery-grid');
+          if ((sections.galleryCn && sections.galleryCn.trim()) || (sections.galleryEn && sections.galleryEn.trim())) {
+            gallerySection.style.display = 'block';
+            galleryGrid.innerHTML = '';
+            if (sections.galleryCn) {
+              var cnDiv3 = document.createElement('div');
+              cnDiv3.className = 'lang-cn';
+              renderGalleryItems(sections.galleryCn, cnDiv3);
+              galleryGrid.appendChild(cnDiv3);
+            }
+            if (sections.galleryEn) {
+              var enDiv3 = document.createElement('div');
+              enDiv3.className = 'lang-en';
+              renderGalleryItems(sections.galleryEn, enDiv3);
+              galleryGrid.appendChild(enDiv3);
+            }
+          } else {
+            gallerySection.style.display = 'none';
+          }
+        }
+
+        if (sections.linksCn || sections.linksEn) {
+          var linksSection = document.getElementById('links-section');
+          var linksContentEl = document.getElementById('links-content');
+          if ((sections.linksCn && sections.linksCn.trim()) || (sections.linksEn && sections.linksEn.trim())) {
+            linksSection.style.display = 'block';
+            linksContentEl.innerHTML = '';
+            if (sections.linksCn) {
+              var cnDiv4 = document.createElement('div');
+              cnDiv4.className = 'lang-cn';
+              renderLinkItems(sections.linksCn, cnDiv4);
+              linksContentEl.appendChild(cnDiv4);
+            }
+            if (sections.linksEn) {
+              var enDiv4 = document.createElement('div');
+              enDiv4.className = 'lang-en';
+              renderLinkItems(sections.linksEn, enDiv4);
+              linksContentEl.appendChild(enDiv4);
+            }
+          } else {
+            linksSection.style.display = 'none';
+          }
+        }
+
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('project-content').style.display = 'block';
+
+      } catch (error) {
+        console.error('Failed to load project:', error);
+        showError();
+      }
+    }
+
+    function showError() {
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('error-state').style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProject);
+  </script>
+</body>
+</html>
