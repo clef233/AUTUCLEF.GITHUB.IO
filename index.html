@@ -322,15 +322,36 @@
     /* ============================================
        MOBILE RESPONSIVE
        ============================================ */
+
+
     @media (max-width: 768px) {
       table[width="960"] {
+        width: 100% !important;
+      }
+
+      /* 关键：取消 fixed 布局，让列宽约束失效 */
+      table[style*="table-layout:fixed"] {
+        table-layout: auto !important;
+      }
+
+      /* 让 colgroup/col 的宽度不再生效 */
+      table col {
+        width: auto !important;
+      }
+
+      /* table/tr/td 全部变块级，垂直堆叠 */
+      table[width="100%"],
+      table[width="100%"] tbody,
+      table[width="100%"] tr {
+        display: block !important;
         width: 100% !important;
       }
 
       table[width="100%"] td {
         display: block !important;
         width: 100% !important;
-        padding: 8px 12px !important;
+        padding: 8px 16px !important;
+        box-sizing: border-box;
       }
 
       .photo-container {
@@ -346,6 +367,7 @@
         font-size: 24px !important;
       }
     }
+
   </style>
 
   <!-- Favicon -->
