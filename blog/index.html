@@ -96,16 +96,15 @@
   </ul>
 
   <footer>
-    Powered by GitHub Pages · 文章存放于 <code>blog/posts/</code>
+    Powered by GitHub Pages · 文章存放于 <code>blog/posts/</code>，列表由 <code>posts/index.json</code> 生成
   </footer>
 </div>
 
 <script>
 (function () {
-  // 通过 GitHub API 自动列出 blog/posts/ 目录下的所有 .html 文章
-  var API = "https://api.github.com/repos/clef233/AUTUCLEF.GITHUB.IO/contents/blog/posts";
-  var RAW = "https://raw.githubusercontent.com/clef233/AUTUCLEF.GITHUB.IO/main/blog/posts/";
-  var MAX_FETCH_TITLE = 30; // 抓取最近 30 篇的 <title> 作为显示标题
+  // 文章清单 posts/index.json 是随仓库提交的静态文件，
+  // 读取时不依赖 GitHub API，因此不会遇到匿名限流（403）。
+  var MANIFEST = "posts/index.json";
 
   var list = document.getElementById("post-list");
   var status = document.getElementById("status");
@@ -117,18 +116,28 @@
     return { date: "", fallbackTitle: name.replace(/\.html$/i, "") };
   }
 
-  fetch(API)
+  function displayTitle(p) {
+    if (p.title && p.title.trim()) return p.title.trim();
+    return p.fallbackTitle;
+  }
+
+  fetch(MANIFEST)
     .then(function (r) {
-      if (!r.ok) throw new Error("GitHub API " + r.status);
+      if (!r.ok) throw new Error("清单 HTTP " + r.status);
       return r.json();
     })
-    .then(function (files) {
-      var posts = files
-        .filter(function (f) { return /\.html$/i.test(f.name); })
+    .then(function (manifest) {
+      var posts = (manifest.posts || [])
+        .filter(function (f) { return f && /\.html$/i.test(f.file); })
         .map(function (f) {
-          var p = parseName(f.name);
-          p.file = f.name;
-          p.url = "posts/" + encodeURIComponent(f.name);
+          var parsed = parseName(f.file);
+          var p = {
+            date: f.date || parsed.date,
+            file: f.file,
+            title: f.title,
+            fallbackTitle: parsed.fallbackTitle
+          };
+          p.url = "posts/" + encodeURIComponent(f.file);
           return p;
         })
         .sort(function (a, b) { return a.date < b.date ? 1 : -1; });
@@ -139,7 +148,6 @@
       }
       status.remove();
 
-      var anchors = [];
       posts.forEach(function (p) {
         var li = document.createElement("li");
         li.className = "post";
@@ -150,23 +158,11 @@
         t.className = "title";
         var a = document.createElement("a");
         a.href = p.url;
-        a.textContent = p.fallbackTitle;
+        a.textContent = displayTitle(p);
         t.appendChild(a);
         li.appendChild(d);
         li.appendChild(t);
         list.appendChild(li);
-        anchors.push({ a: a, file: p.file });
-      });
-
-      // 抓取每篇文章的 <title> 作为显示标题（失败则保留文件名标题）
-      anchors.slice(0, MAX_FETCH_TITLE).forEach(function (item) {
-        fetch(RAW + encodeURIComponent(item.file))
-          .then(function (r) { return r.ok ? r.text() : ""; })
-          .then(function (html) {
-            var m = html.match(/<title>([^<]*)<\/title>/i);
-            if (m && m[1].trim()) item.a.textContent = m[1].trim();
-          })
-          .catch(function () {});
       });
     })
     .catch(function (e) {
