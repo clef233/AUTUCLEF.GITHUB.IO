@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博客 Blog · clef233</title>
+<style>
+  :root {
+    --en-color: #1a3a5c;
+    --zh-color: #333;
+    --accent: #b02a30;
+    --border: #e3e8ee;
+    --bg-soft: #f7f9fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Georgia", "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+    color: #222;
+    background: #fff;
+    line-height: 1.75;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  header {
+    border-bottom: 3px double var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+  }
+  .section-label {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: bold; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 32px; margin: 6px 0 4px; color: var(--en-color); line-height: 1.25;
+  }
+  h1 .zh { font-size: 20px; color: #777; font-weight: normal; margin-left: 12px; }
+  .sub { font-size: 14px; color: #666; margin-top: 8px; }
+  .back {
+    display: inline-block; margin-top: 12px; font-size: 13px;
+    color: var(--accent); text-decoration: none;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .back:hover { text-decoration: underline; }
+
+  ul.posts { list-style: none; padding: 0; margin: 0; }
+  li.post {
+    padding: 18px 8px; border-bottom: 1px solid var(--border);
+    display: flex; gap: 22px; align-items: baseline;
+    transition: background .15s;
+  }
+  li.post:hover { background: var(--bg-soft); }
+  .date {
+    flex: 0 0 96px; font-size: 13px; color: #888;
+    font-family: "Courier New", monospace;
+  }
+  .title { font-size: 17px; }
+  .title a { color: var(--en-color); text-decoration: none; }
+  .title a:hover { color: var(--accent); text-decoration: underline; }
+
+  .status {
+    color: #888; font-size: 14px; padding: 36px 8px;
+    background: var(--bg-soft); border-left: 4px solid var(--accent);
+    padding-left: 16px; margin-top: 12px;
+  }
+  .error { color: var(--accent); }
+
+  footer {
+    margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-size: 12.5px; color: #888; font-family: Arial, sans-serif;
+  }
+  code {
+    background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+    font-size: 12px;
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 32px 20px 60px; }
+    h1 { font-size: 24px; }
+    h1 .zh { display: block; margin-left: 0; margin-top: 4px; }
+    li.post { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="section-label">Blog · 博客</div>
+    <h1>Blog<span class="zh">随笔 · 笔记 · 翻译</span></h1>
+    <div class="sub">clef233 的个人博客 — Notes, essays and translations.</div>
+    <a class="back" href="../">← 返回主页 / Back to Home</a>
+  </header>
+
+  <ul class="posts" id="post-list">
+    <li class="status" id="status">文章列表加载中…</li>
+  </ul>
+
+  <footer>
+    Powered by GitHub Pages · 文章存放于 <code>blog/posts/</code>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // 通过 GitHub API 自动列出 blog/posts/ 目录下的所有 .html 文章
+  var API = "https://api.github.com/repos/clef233/AUTUCLEF.GITHUB.IO/contents/blog/posts";
+  var RAW = "https://raw.githubusercontent.com/clef233/AUTUCLEF.GITHUB.IO/main/blog/posts/";
+  var MAX_FETCH_TITLE = 30; // 抓取最近 30 篇的 <title> 作为显示标题
+
+  var list = document.getElementById("post-list");
+  var status = document.getElementById("status");
+
+  function parseName(name) {
+    // 文件名约定：YYYY-MM-DD-标题.html
+    var m = name.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.html$/i);
+    if (m) return { date: m[1], fallbackTitle: decodeURIComponent(m[2]).replace(/-/g, " ") };
+    return { date: "", fallbackTitle: name.replace(/\.html$/i, "") };
+  }
+
+  fetch(API)
+    .then(function (r) {
+      if (!r.ok) throw new Error("GitHub API " + r.status);
+      return r.json();
+    })
+    .then(function (files) {
+      var posts = files
+        .filter(function (f) { return /\.html$/i.test(f.name); })
+        .map(function (f) {
+          var p = parseName(f.name);
+          p.file = f.name;
+          p.url = "posts/" + encodeURIComponent(f.name);
+          return p;
+        })
+        .sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+
+      if (!posts.length) {
+        status.textContent = "还没有文章 — 上传第一篇 HTML 到 blog/posts/ 吧。";
+        return;
+      }
+      status.remove();
+
+      var anchors = [];
+      posts.forEach(function (p) {
+        var li = document.createElement("li");
+        li.className = "post";
+        var d = document.createElement("span");
+        d.className = "date";
+        d.textContent = p.date;
+        var t = document.createElement("span");
+        t.className = "title";
+        var a = document.createElement("a");
+        a.href = p.url;
+        a.textContent = p.fallbackTitle;
+        t.appendChild(a);
+        li.appendChild(d);
+        li.appendChild(t);
+        list.appendChild(li);
+        anchors.push({ a: a, file: p.file });
+      });
+
+      // 抓取每篇文章的 <title> 作为显示标题（失败则保留文件名标题）
+      anchors.slice(0, MAX_FETCH_TITLE).forEach(function (item) {
+        fetch(RAW + encodeURIComponent(item.file))
+          .then(function (r) { return r.ok ? r.text() : ""; })
+          .then(function (html) {
+            var m = html.match(/<title>([^<]*)<\/title>/i);
+            if (m && m[1].trim()) item.a.textContent = m[1].trim();
+          })
+          .catch(function () {});
+      });
+    })
+    .catch(function (e) {
+      status.textContent = "文章列表加载失败（" + e.message + "），请稍后刷新重试。";
+      status.classList.add("error");
+    });
+})();
+</script>
+</body>
+</html>
