@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Strength of Weak Ties / 弱关系的力量 — Granovetter, AJS 1973</title>
+<style>
+  :root {
+    --en-color: #1a3a5c;
+    --zh-color: #333;
+    --accent: #b02a30;
+    --border: #e3e8ee;
+    --bg-soft: #f7f9fb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Georgia", "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+    color: #222;
+    background: #fff;
+    line-height: 1.75;
+  }
+  .page { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; }
+
+  header.paper-head {
+    border-bottom: 3px double var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 32px;
+  }
+  .journal {
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: bold; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 34px; margin: 6px 0 4px; color: var(--en-color); line-height: 1.25;
+  }
+  h1 .zh { display: block; font-size: 26px; color: #555; font-weight: normal; margin-top: 6px; }
+  .authors { font-size: 15px; color: #444; margin: 14px 0 4px; }
+  .authors-zh { font-size: 14px; color: #777; }
+  .meta {
+    font-size: 13px; color: #666; margin-top: 14px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .teaser {
+    background: var(--bg-soft); border-left: 4px solid var(--accent);
+    padding: 14px 18px; margin: 20px 0 0; font-size: 15px; font-style: italic;
+  }
+  .teaser .zh { display: block; font-style: normal; color: #555; margin-top: 6px; font-size: 14px; }
+
+  .pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+  }
+  .pair .en {
+    color: var(--en-color); text-align: justify;
+    font-size: 15.5px;
+  }
+  .pair .zh {
+    color: var(--zh-color); text-align: justify;
+    font-size: 15.5px;
+  }
+  .pair .en::first-letter { }
+  .note {
+    display: block; margin-top: 8px; padding-top: 6px;
+    border-top: 1px dotted var(--border);
+    font-size: 12.5px; line-height: 1.6; color: #8a8a8a;
+  }
+  @media (max-width: 760px) {
+    .pair { grid-template-columns: 1fr; gap: 10px; }
+    h1 { font-size: 26px; }
+  }
+
+  .section-label {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px; letter-spacing: 2px; color: #999;
+    text-transform: uppercase; margin: 40px 0 0;
+  }
+  h2 {
+    font-size: 22px; color: var(--en-color); margin: 8px 0 0;
+  }
+  h2 .zh { font-size: 18px; color: #666; font-weight: normal; margin-left: 10px; }
+
+  .caption {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px 20px; margin: 24px 0;
+    font-size: 13.5px;
+  }
+  .caption .label { font-weight: bold; color: var(--accent); font-family: Arial, sans-serif; font-size: 12px; letter-spacing: 1px; }
+
+  ol.refs { font-size: 13px; color: #444; padding-left: 22px; }
+  ol.refs li { margin-bottom: 5px; }
+  .refs-zh-note { font-size: 13px; color: #777; font-style: italic; }
+
+  .affil { font-size: 13px; color: #555; background: var(--bg-soft); padding: 14px 18px; border-radius: 6px; }
+
+  footer {
+    margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-size: 12.5px; color: #888; font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="paper-head">
+  <div class="journal">American Journal of Sociology · Vol. 78 No. 6 · May 1973</div>
+  <h1>The Strength of Weak Ties<span class="zh">弱关系的力量</span></h1>
+  <div class="authors">Mark S. Granovetter</div>
+  <div class="authors-zh">马克·S·格兰诺维特（约翰斯·霍普金斯大学）</div>
+  <div class="meta">
+    American Journal of Sociology, Vol. 78, No. 6 (May, 1973), pp. 1360–1380 · Published by The University of Chicago Press · DOI: 10.1086/225469
+  </div>
+  <div class="teaser">
+    Analysis of social networks is suggested as a tool for linking micro and macro levels of sociological theory... Stress is laid on the cohesive power of weak ties.
+    <span class="zh">本文提出将社会网络分析作为连接社会学理论微观层次与宏观层次的工具……并着重强调弱关系所具有的凝聚力量。</span>
+  </div>
+</header>
+
+<!-- 摘要 -->
+<div class="section-label">Abstract · 摘要</div>
+
+<div class="pair">
+  <div class="en">Analysis of social networks is suggested as a tool for linking micro and macro levels of sociological theory. The procedure is illustrated by elaboration of the macro implications of one aspect of small-scale interaction: the strength of dyadic ties. It is argued that the degree of overlap of two individuals' friendship networks varies directly with the strength of their tie to one another. The impact of this principle on diffusion of influence and information, mobility opportunity, and community organization is explored. Stress is laid on the cohesive power of weak ties. Most network models deal, implicitly, with strong ties, thus confining their applicability to small, well-defined groups. Emphasis on weak ties lends itself to discussion of relations between groups and to analysis of segments of social structure not easily defined in terms of primary groups.</div>
+  <div class="zh">本文提出，社会网络分析可以作为连接社会学理论微观层次与宏观层次的一种工具。文章通过详细阐述小规模互动的某一方面——dyadic ties（二元关系）的强度——所具有的宏观意涵，来例示这一研究程序。本文的核心论点是：两个人各自友谊网络的重叠程度，与他们彼此之间关系（tie，关系）的强度成正相关。文章考察了这一原则对影响与信息的扩散（diffusion of influence and information）、流动机会（mobility opportunity）以及社区组织（community organization）所产生的作用，并着重强调 weak ties（弱关系）所具有的凝聚力量。大多数网络模型都在隐含地处理 strong ties（强关系），因而将其适用范围局限于边界清晰的小群体。而对弱关系的强调，则有助于讨论群体之间的关系，并有助于分析那些难以用首属群体（primary groups）来界定的社会结构片段。</div>
+</div>
+
+<!-- 引言 -->
+<div class="section-label">Introduction · 引言</div>
+
+<div class="pair">
+  <div class="en">A fundamental weakness of current sociological theory is that it does not relate micro-level interactions to macro-level patterns in any convincing way. Large-scale statistical, as well as qualitative, studies offer a good deal of insight into such macro phenomena as social mobility, community organization, and political structure. At the micro level, a large and increasing body of data and theory offers useful and illuminating ideas about what transpires within the confines of the small group. But how interaction in small groups aggregates to form large-scale patterns eludes us in most cases.</div>
+  <div class="zh">当代社会学理论的一个根本缺陷在于，它未能以任何令人信服的方式把微观层次的互动与宏观层次的模式联系起来。大规模的统计研究以及定性研究，都为我们理解社会流动、社区组织和政治结构这类宏观现象提供了大量洞见。在微观层次上，规模庞大且与日俱增的资料与理论，也为我们理解小群体内部所发生的事情提供了有益而富有启发性的观念。然而，小群体中的互动究竟如何聚合成大规模的模式，在大多数情况下仍然是我们难以把握的问题。</div>
+</div>
+
+<div class="pair">
+  <div class="en">I will argue, in this paper, that the analysis of processes in interpersonal networks provides the most fruitful micro-macro bridge. In one way or another, it is through these networks that small-scale interaction becomes translated into large-scale patterns, and that these, in turn, feed back into small groups.</div>
+  <div class="zh">我在本文中将要论证的是：对人际网络中各种过程的分析，提供了最富有成效的微观—宏观桥梁。无论以何种方式，正是通过这些网络，小规模互动才被转译为大规模的模式；而这些大规模模式又反过来回馈到小群体之中。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Sociometry, the precursor of network analysis, has always been curiously peripheral—invisible, really—in sociological theory. This is partly because it has usually been studied and applied only as a branch of social psychology; it is also because of the inherent complexities of precise network analysis. We have had neither the theory nor the measurement and sampling techniques to move sociometry from the usual small-group level to that of larger structures. While a number of stimulating and suggestive studies have recently moved in this direction (Bott 1957; Mayer 1961; Milgram 1967; Boissevain 1968; Mitchell 1969), they do not treat structural issues in much theoretical detail. Studies which do so usually involve a level of technical complexity appropriate to such forbidding sources as the <em>Bulletin of Mathematical Biophysics</em>, where the original motivation for the study of networks was that of developing a theory of neural, rather than social, interaction (see the useful review of this literature by Coleman [1960]; also Rapoport [1963]).</div>
+  <div class="zh">社会计量学（sociometry）作为网络分析的前身，在社会学理论中一直处于一种奇特的边缘地位——实际上可以说是隐形的。这一方面是因为它通常只被当作社会心理学的一个分支来研究和运用；另一方面则是因为精确的网络分析本身具有内在的复杂性。我们既缺乏相应的理论，也缺乏相应的测量与抽样技术，不足以把社会计量学从通常的小群体层次推进到更大结构的层次。尽管近来已有一些富有启发性和建设性的研究朝这一方向推进（Bott 1957；Mayer 1961；Milgram 1967；Boissevain 1968；Mitchell 1969），但它们并未在理论细节上充分处理结构问题。而那些确实处理了结构问题的研究，其技术复杂程度通常已经达到了《数学生物物理学公报》（<em>Bulletin of Mathematical Biophysics</em>）这类令人望而生畏的文献所具有的水平；在这些文献中，研究网络的最初动机乃是要发展一种关于神经互动而非社会互动的理论（参见 Coleman [1960] 对这一文献的有益综述；另见 Rapoport [1963]）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The strategy of the present paper is to choose a rather limited aspect of small-scale interaction—the strength of interpersonal ties—and to show, in some detail, how the use of network analysis can relate this aspect to such varied macro phenomena as diffusion, social mobility, political organization, and social cohesion in general. While the analysis is essentially qualitative, a mathematically inclined reader will recognize the potential for models; mathematical arguments, leads, and references are suggested mostly in footnotes.<span class="note">1 This paper originated in discussions with Harrison White, to whom I am indebted for many suggestions and ideas. Earlier drafts were read by Ivan Chase, James Davis, William Michelson, Nancy Lee, Peter Rossi, Charles Tilly, and an anonymous referee; their criticisms resulted in significant improvements.｜注1：本文源于与哈里森·怀特（Harrison White）的讨论，我深受其诸多建议与观点的启发。早期草稿曾由伊万·蔡斯、詹姆斯·戴维斯、威廉·米切尔森、南希·李、彼得·罗西、查尔斯·蒂利以及一位匿名审稿人阅读；他们的批评使本文有了显著改进。</span></div>
+  <div class="zh">本文的策略是：选取小规模互动中一个相当有限的方面——人际关系的强度——并较为详细地说明，运用网络分析如何能够把这一方面与扩散、社会流动、政治组织以及一般意义上的社会凝聚力（social cohesion）等形形色色的宏观现象联系起来。尽管本文的分析本质上是定性的，但具有数学倾向的读者会看出其中蕴含的建模潜力；数学论证、线索与参考文献大多放在脚注中提示。<span class="note">1 This paper originated in discussions with Harrison White...｜注1：本文源于与哈里森·怀特（Harrison White）的讨论……（译文见左栏）</span></div>
+</div>
+
+<!-- 1. THE STRENGTH OF TIES -->
+<div class="section-label">Section 1 · 第一节</div>
+<h2>THE STRENGTH OF TIES<span class="zh">关系的强度</span></h2>
+
+<div class="pair">
+  <div class="en">Most intuitive notions of the "strength" of an interpersonal tie should be satisfied by the following definition: the strength of a tie is a (probably linear) combination of the amount of time, the emotional intensity, the intimacy (mutual confiding), and the reciprocal services which characterize the tie.<span class="note">2 Ties discussed in this paper are assumed to be positive and symmetric; a comprehensive theory might require discussion of negative and/or asymmetric ties, but this would add unnecessary complexity to the present, exploratory comments.<br>3 Some anthropologists suggest "multiplexity," that is, multiple contents in a relationship, as indicating a strong tie (Kapferer 1969, p. 213). While this may be accurate in some circumstances, ties with only one content or with diffuse content may be strong as well (Simmel 1950, pp. 317–29). The present definition would show most multiplex ties to be strong but also allow for other possibilities.<br>4 Included in "absent" are both the lack of any relationship and ties without substantial significance, such as a "nodding" relationship between people living on the same street, or the "tie" to the vendor from whom one customarily buys a morning newspaper. That two people "know" each other by name need not move their relation out of this category if their interaction is negligible. In some contexts, however (disasters, for example), such "negligible" ties might usefully be distinguished from the absence of one. This is an ambiguity caused by substitution, for convenience of exposition, of discrete values for an underlying continuous variable.</span></div>
+  <div class="zh">对于人际关系的"强度"，大多数直觉性的理解都应当能为下述定义所满足：一个关系的强度，是（很可能是线性地）由刻画这一关系的四个要素组合而成——时间的多寡、情感的强度、亲密程度（相互倾诉）以及互惠性的服务。<span class="note">注2：本文所讨论的关系被假定为正向的、对称的；一种完备的理论或许需要讨论负向的和／或不对称的关系，但这会给本文探索性的论述平添不必要的复杂性。<br>注3：一些人类学家提出以"多重性"（multiplexity，即一段关系中包含多重内容）作为强关系的标志（Kapferer 1969, p. 213）。尽管这在某些情形下可能是对的，但只有单一内容或内容弥散的关系同样可能是强关系（Simmel 1950, pp. 317–29）。本文的定义会把大多数多重（multiplex）关系显示为强关系，但也为其他可能性留有余地。<br>注4：归入"缺失"（absent）这一类的，既包括根本没有任何关系，也包括缺乏实质意义的关系，例如住在同一条街上的人之间的"点头之交"，或者一个人与通常向其购买晨报的报贩之间的"关系"。如果两人之间的互动微不足道，那么他们"知道"彼此姓名这一点，并不必然使他们的关系脱离这一类别。然而在某些情境下（例如灾难），把这类"微不足道"的关系与"没有关系"区分开来可能是有益的。这是一种含混，其成因是为了叙述方便，用离散取值替代了 underlying continuous variable（底层连续变量）。</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">Each of these is somewhat independent of the other, though the set is obviously highly intracorrelated. Discussion of operational measures of and weights attaching to each of the four elements is postponed to future empirical studies. It is sufficient for the present purpose if most of us can agree, on a rough intuitive basis, whether a given tie is strong, weak, or absent.</div>
+  <div class="zh">这四个要素彼此之间在某种程度上相互独立，尽管这一组要素显然高度内部相关。关于这四个要素各自的操作化测量方法以及所附权重的讨论，我将推迟到今后的经验研究中再行处理。就本文的目的而言，只要我们大多数人能够在粗略的直觉基础上，就某一给定的关系是强的、弱的还是缺失的达成一致，便已足够。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Consider, now, any two arbitrarily selected individuals—call them A and B—and the set, S = C, D, E, ..., of all persons with ties to either or both of them. The hypothesis which enables us to relate dyadic ties to larger structures is: the stronger the tie between A and B, the larger the proportion of individuals in S to whom they will both be tied, that is, connected by a weak or strong tie. This overlap in their friendship circles is predicted to be least when their tie is absent, most when it is strong, and intermediate when it is weak.<span class="note">5 In Barnes's terminology, the union of their respective primary stars (1969, p. 58).｜注5：用巴恩斯（Barnes）的术语说，即两人各自 primary star（首要星形）的并集（1969, p. 58）。</span></div>
+  <div class="zh">现在，考虑任意选定的两个人——称他们为 A 和 B——以及集合 S = C, D, E, ...，即所有与其中一人或两人都有关联的人。使我们能够把二元关系与更大结构联系起来的假设是：A 与 B 之间的关系越强，他们共同与之关联（即以弱关系或强关系相连）的人在 S 中所占的比例就越大。据预测，他们友谊圈子的这种重叠，在二人关系缺失时最小，在关系强时最大，在关系弱时居中。<span class="note">注5：用巴恩斯（Barnes）的术语说，即两人各自 primary star（首要星形）的并集（1969, p. 58）。</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">The proposed relationship results, first, from the tendency (by definition) of stronger ties to involve larger time commitments. If A-B and A-C ties exist, then the amount of time C spends with B depends (in part) on the amount A spends with B and C, respectively. (If the events "A is with B" and "A is with C" were independent, then the event "C is with A and B" would have probability equal to the product of their probabilities. For example, if A and B are together 60% of the time, and A and C 40%, then C, A, and B would be together 24% of the time. Such independence would be less likely after than before B and C became acquainted.) If C and B have no relationship, common strong ties to A will probably bring them into interaction and generate one. Implicit here is Homans's idea that "the more frequently persons interact with one another, the stronger their sentiments of friendship for one another are apt to be" (1950, p. 133).</div>
+  <div class="zh">上述关系的形成，首先源于（按照定义）较强的关系往往牵涉更多的时间投入。如果 A-B 关系和 A-C 关系都存在，那么 C 与 B 相处的时间长短（部分地）取决于 A 分别与 B 和 C 相处的时间。（如果"A 与 B 在一起"和"A 与 C 在一起"这两个事件相互独立，那么"C 与 A、B 同时在一起"这一事件的概率就等于二者概率的乘积。例如，若 A 与 B 有 60% 的时间在一起，A 与 C 有 40% 的时间在一起，那么 C、A、B 三人同时在一起的时间就是 24%。相比 B 与 C 相识之前，这种独立性在他们相识之后出现的可能性更小。）如果 C 与 B 之间没有关系，那么他们与 A 共同的强关系很可能会把两人带入互动，并生成一段关系。这里隐含了霍曼斯（Homans）的观点："人们彼此互动越频繁，他们对彼此的友谊情感往往就越强烈"（1950, p. 133）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The hypothesis is made plausible also by empirical evidence that the stronger the tie connecting two individuals, the more similar they are, in various ways (Berscheid and Walster 1969, pp. 69–91; Bramel 1969, pp. 9–16; Brown 1965, pp. 71–90; Laumann 1968; Newcomb 1961, chap. 5; Precker 1952). Thus, if strong ties connect A to B and A to C, both C and B, being similar to A, are probably similar to one another, increasing the likelihood of a friendship once they have met. Applied in reverse, these two factors—time and similarity—indicate why weaker A-B and A-C ties make a C-B tie less likely than strong ones: C and B are less likely to interact and less likely to be compatible if they do.</div>
+  <div class="zh">使这一假设显得合理的还有经验证据：连接两个人的关系越强，他们在各种方面就越相似（Berscheid and Walster 1969, pp. 69–91；Bramel 1969, pp. 9–16；Brown 1965, pp. 71–90；Laumann 1968；Newcomb 1961, 第5章；Precker 1952）。因此，如果强关系把 A 与 B、A 与 C 连接起来，那么 C 和 B 由于都与 A 相似，很可能彼此也相似，这就增加了二人一旦相识便结成友谊的可能性。反过来运用这两个因素——时间与相似性——便可说明，为什么较弱的 A-B 与 A-C 关系会使 C-B 关系出现的可能性低于强关系的情形：C 与 B 互动的可能性更小，而且即便互动，彼此相容的可能性也更小。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The theory of cognitive balance, as formulated by Heider (1958) and especially by Newcomb (1961, pp. 4–23), also predicts this result. If strong ties A-B and A-C exist, and if B and C are aware of one another, anything short of a positive tie would introduce a "psychological strain" into the situation since C will want his own feelings to be congruent with those of his good friend, A, and similarly, for B and his friend, A. Where the ties are weak, however, such consistency is psychologically less crucial. (On this point see also Homans [1950, p. 255] and Davis [1963, p. 448].)</div>
+  <div class="zh">由海德（Heider, 1958）提出、尤其由纽科姆（Newcomb, 1961, pp. 4–23）所阐发的认知平衡理论，也预测到了这一结果。如果 A-B 与 A-C 两个强关系存在，且 B 与 C 彼此知晓对方，那么任何不及正向关系的状态都会给这一情境引入"心理紧张"，因为 C 会希望自己的感受与其好友 A 的感受相一致；B 与其朋友 A 之间的关系亦是如此。然而，当关系较弱时，这种一致性在心理上就不那么关键了。（关于这一点，另见 Homans [1950, p. 255] 与 Davis [1963, p. 448]。）</div>
+</div>
+
+<div class="pair">
+  <div class="en">Some direct evidence for the basic hypothesis exists (Kapferer 1969, p. 229 n.; Laumann and Schuman 1967; Rapoport and Horvath 1961; Rapoport 1963). This evidence is less comprehensive than one might hope. In addition, however, certain inferences from the hypothesis have received empirical support. Description of these inferences will suggest some of the substantive implications of the above argument.<span class="note">6 The models and experiments of Rapoport and his associates have been a major stimulus to this paper. In 1954 he commented on the "well-known fact that the likely contacts of two individuals who are closely acquainted tend to be more overlapping than those of two arbitrarily selected individuals" (p. 75). His and Horvath's 1961 hypothesis is even closer to mine: "one would expect the friendship relations, and therefore the overlap bias of the acquaintance circles, to become less tight with increasing numerical rank-order" (p. 290). (I.e., best friend, second-best friend, third-best, etc.) Their development of this hypothesis, however, is quite different, substantively and mathematically, from mine (Rapoport 1953a, 1953b, 1954, 1963; Rapoport and Horvath 1961).｜注6：拉波波特（Rapoport）及其合作者的模型与实验是本文的主要刺激来源。1954 年，他评论道："一个众所周知的事实是，两个彼此熟识之人的可能联系人，其重叠程度往往高于两个任意选定之人的可能联系人"（p. 75）。他与霍瓦特（Horvath）1961 年提出的假设与我的更为接近："人们会预期，友谊关系、以及由此带来的熟人圈子的重叠偏向，会随着数字序位的升高而变得不那么紧密"（p. 290）。（即：最好的朋友、第二好的朋友、第三好的，等等。）不过，他们对这一假设的展开，无论在实质内容上还是在数学处理上，都与我的相当不同（Rapoport 1953a, 1953b, 1954, 1963；Rapoport and Horvath 1961）。</span></div>
+  <div class="zh">支持这一基本假设的直接证据是存在的（Kapferer 1969, p. 229 n.；Laumann and Schuman 1967；Rapoport and Horvath 1961；Rapoport 1963）。这类证据的全面程度尚不及人们所期望的。不过，除此之外，由该假设推出的某些推论已经获得了经验支持。对这些推论的描述，将提示出上述论证所具有的若干实质性意涵。<span class="note">注6：拉波波特（Rapoport）及其合作者的模型与实验是本文的主要刺激来源……（全译见左栏）</span></div>
+</div>
+
+<!-- 2. WEAK TIES IN DIFFUSION PROCESSES -->
+<div class="section-label">Section 2 · 第二节</div>
+<h2>WEAK TIES IN DIFFUSION PROCESSES<span class="zh">扩散过程中的弱关系</span></h2>
+
+<div class="pair">
+  <div class="en">To derive implications for large networks of relations, it is necessary to frame the basic hypothesis more precisely. This can be done by investigating the possible triads consisting of strong, weak, or absent ties among A, B, and any arbitrarily chosen friend of either or both (i.e., some member of the set S, described above). A thorough mathematical model would do this in some detail, suggesting probabilities for various types. This analysis becomes rather involved, however, and it is sufficient for my purpose in this paper to say that the triad which is most unlikely to occur, under the hypothesis stated above, is that in which A and B are strongly linked, A has a strong tie to some friend C, but the tie between C and B is absent. This triad is shown in figure 1.</div>
+  <div class="zh">要推导出对大规模关系网络的意涵，有必要更精确地表述基本假设。这可以通过考察可能的三元组（triads）来实现：即在 A、B 以及任意选定的与其中一人或两人有朋友关系的人（即上文所述集合 S 中的某个成员）之间，由强关系、弱关系或缺失关系所构成的三元组。一个彻底的数学模型会较为详细地处理这一点，为各种类型给出概率。然而，这一分析会变得相当繁复；就本文的目的而言，只需说明以下一点便已足够：在上述假设之下，最不可能出现的三元组是——A 与 B 由强关系相连，A 与某位朋友 C 有强关系，而 C 与 B 之间的关系却缺失。这一三元组如图 1 所示。</div>
+</div>
+
+<div class="caption">
+  <div class="label">FIGURE 1 · 图 1</div>
+  <div class="pair" style="border:none;padding:8px 0 0;">
+    <div class="en"><strong>Fig. 1.—Forbidden triad.</strong> A and B are strongly tied; A is strongly tied to C; but the tie between C and B is absent.</div>
+    <div class="zh"><strong>图 1——禁现三元组（forbidden triad）。</strong>A 与 B 之间是强关系，A 与 C 之间也是强关系，但 C 与 B 之间的关系缺失。</div>
+  </div>
+</div>
+
+<div class="pair">
+  <div class="en">To see the consequences of this assertion, I will exaggerate it in what follows by supposing that the triad shown never occurs—that is, that the B-C tie is always present (whether weak or strong), given the other two strong ties. Whatever results are inferred from this supposition should tend to occur in the degree that the triad in question tends to be absent.</div>
+  <div class="zh">为了看清这一论断的后果，我在下文中将把它加以夸大，假定图示的三元组永不出现——也就是说，在给定另外两条强关系的情况下，B-C 关系总是存在（无论其为弱为强）。凡是由这一假定推导出的结果，其发生的程度，应当与该三元组倾向于缺失的程度相对应。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Some evidence exists for this absence. Analyzing 651 sociograms, Davis (1970, p. 845) found that in 90% of them triads consisting of two mutual choices and one nonchoice occurred less than the expected random number of times. If we assume that mutual choice indicates a strong tie, this is strong evidence in the direction of my argument.<span class="note">7 This assumption is suggested by one of Davis's models (1970, p. 846) and made explicitly by Mazur (1971). It is not obvious, however. In a free-choice sociometric test or a fixed-choice one with a large number of choices, most strong ties would probably result in mutual choice, but some weak ones might as well. With a small, fixed number of choices, most mutual choices should be strong ties, but some strong ties might show up as asymmetric. For a general discussion of the biases introduced by sociometric procedures, see Holland and Leinhardt (1971b).｜注7：这一假定由戴维斯的一个模型（1970, p. 846）所提示，并由马祖尔（Mazur, 1971）明确提出。然而它并非显而易见。在自由选择式的社会计量测验中，或在允许大量选择的固定选择式测验中，大多数强关系大概都会导致互相选择，但某些弱关系也可能如此。在允许选择数目很少且固定的情况下，大多数互选应当是强关系，但某些强关系也可能表现为不对称的。关于社会计量程序所引入偏误的一般讨论，见 Holland and Leinhardt (1971b)。</span></div>
+  <div class="zh">支持这一"缺失"的证据是存在的。戴维斯（Davis, 1970, p. 845）分析了 651 份社会关系图（sociograms），发现其中 90% 的社会关系图里，由两个互选和一个未选构成的三元组，其出现次数低于随机预期的次数。如果我们假定互选意味着强关系，那么这就是支持本文论证方向的强有力证据。<span class="note">注7：这一假定由戴维斯的一个模型（1970, p. 846）所提示，并由马祖尔（Mazur, 1971）明确提出……（全译见左栏）</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">Newcomb (1961, pp. 160–65) reports that in triads consisting of dyads expressing mutual "high attraction," the configuration of three strong ties became increasingly frequent as people knew one another longer and better; the frequency of the triad pictured in figure 1 is not analyzed, but it is implied that processes of cognitive balance tended to eliminate it.</div>
+  <div class="zh">纽科姆（Newcomb, 1961, pp. 160–65）报告说，在由表达相互"高吸引"的二方组（dyads）所构成的三元组中，随着人们相识时间更长、了解更深，三条强关系的构型出现得越来越频繁；他并未分析图 1 所示三元组的频率，但其中隐含的意思是：认知平衡的过程倾向于将其消除。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The significance of this triad's absence can be shown by using the concept of a "bridge"; this is a line in a network which provides the only path between two points (Harary, Norman, and Cartwright 1965, p. 198). Since, in general, each person has a great many contacts, a bridge between A and B provides the only route along which information or influence can flow from any contact of A to any contact of B, and, consequently, from anyone connected indirectly to A to anyone connected indirectly to B. Thus, in the study of diffusion, we can expect bridges to assume an important role.</div>
+  <div class="zh">这一三元组缺失的意义，可以借助"桥"（bridge）的概念来加以说明：所谓桥，是指网络中提供两点之间唯一路径的一条连线（Harary, Norman, and Cartwright 1965, p. 198）。由于一般而言每个人都拥有大量的联系人，A 与 B 之间的一座桥就提供了唯一通道，使信息或影响能够沿其从 A 的任一联系人流向 B 的任一联系人；进而，也能从任何间接与 A 相连的人流向任何间接与 B 相连的人。因此，在扩散研究中，我们可以预期桥会担当重要角色。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Now, if the stipulated triad is absent, it follows that, except under unlikely conditions, no strong tie is a bridge. Consider the strong tie A-B: if A has another strong tie to C, then forbidding the triad of figure 1 implies that a tie exists between C and B, so that the path A-C-B exists between A and B; hence, A-B is not a bridge. A strong tie can be a bridge, therefore, only if neither party to it has any other strong ties, unlikely in a social network of any size (though possible in a small group). Weak ties suffer no such restriction, though they are certainly not automatically bridges. What is important, rather, is that all bridges are weak ties.</div>
+  <div class="zh">那么，如果所规定的三元组确实缺失，便可推出：除非在极不可能的条件下，任何强关系都不会是桥。考察强关系 A-B：如果 A 与 C 另有强关系，那么禁止图 1 的三元组就意味着 C 与 B 之间存在关系，从而在 A 与 B 之间存在路径 A-C-B；因此，A-B 不是桥。可见，只有当一段强关系的双方都不再有任何其他强关系时，它才可能成为桥——而这在任何规模的社会网络中都不大可能出现（尽管在小群体中是可能的）。弱关系则不受此类限制，尽管它们当然也不自动就是桥。真正重要的是：一切桥都是弱关系。</div>
+</div>
+
+<div class="pair">
+  <div class="en">In large networks it probably happens only rarely, in practice, that a specific tie provides the only path between two points. The bridging function may nevertheless be served locally. In figure 2a, for example, the tie A-B is not strictly a bridge, since one can construct the path A-E-J-B (and others). Yet, A-B is the shortest route to B for F, D, and C. This function is clearer in figure 2b. Here, A-B is, for C, D, and others, not only a local bridge to B, but, in most real instances of diffusion, a much more likely and efficient path.</div>
+  <div class="zh">在大规模网络中，某一特定关系恰为两点之间唯一路径的情形，在实践中大概很少发生。尽管如此，架桥的功能仍可以在局部得到实现。例如在图 2a 中，关系 A-B 严格说来并不是桥，因为人们可以构造出路径 A-E-J-B（以及其他路径）。然而，对于 F、D 和 C 而言，A-B 仍是通往 B 的最短路径。这一功能在图 2b 中表现得更为清楚：在这里，对于 C、D 及其他人而言，A-B 不仅是通往 B 的一座局部桥（local bridge），而且在大多数实际的扩散情形中，还是一条可能性更大、效率更高的路径。</div>
+</div>
+
+<div class="caption">
+  <div class="label">FIGURE 2 · 图 2</div>
+  <div class="pair" style="border:none;padding:8px 0 0;">
+    <div class="en"><strong>Fig. 2.—Local bridges.</strong> a, Degree 3; b, Degree 13. —— = strong tie; - - - = weak tie.</div>
+    <div class="zh"><strong>图 2——局部桥。</strong>a，度数为 3；b，度数为 13。实线 = 强关系；虚线 = 弱关系。</div>
+  </div>
+</div>
+
+<div class="pair">
+  <div class="en">Harary et al. point out that "there may be a distance [length of path] beyond which it is not feasible for <em>u</em> to communicate with <em>v</em> because of costs or distortions entailed in each act of transmission. If <em>v</em> does not lie within this critical distance, then he will not receive messages originating with <em>u</em>" (1965, p. 159). I will refer to a tie as a "local bridge of degree <em>n</em>" if it represents the shortest path between its two points (other than itself), and <em>n</em> &gt; 2. In figure 2a, A-B is a local bridge of degree 3, in 2b, of degree 13. As with bridges in a highway system, a local bridge in a social network will be more significant as a connection between two sectors to the extent that it is the only alternative for many people—that is, as its degree increases. A bridge in the absolute sense is a local one of infinite degree. By the same logic used above, only weak ties may be local bridges.</div>
+  <div class="zh">哈拉里（Harary）等人指出："可能存在这样一个距离［路径长度］，超过它之后，<em>u</em> 与 <em>v</em> 的沟通就变得不可行，因为每一次传递行为都会带来成本或失真。如果 <em>v</em> 不处在这一临界距离之内，他就不会收到源自 <em>u</em> 的信息"（1965, p. 159）。我将把满足以下条件的一个关系称为"度数为 <em>n</em> 的局部桥"：它代表其两端点之间（除自身之外）的最短路径，且 <em>n</em> &gt; 2。在图 2a 中，A-B 是度数为 3 的局部桥；在图 2b 中，度数为 13。正如公路系统中的桥梁一样，社会网络中的一座局部桥，作为两个部门之间的连接，其重要程度取决于它对多少人来说是唯一的选择——也就是说，取决于其度数的高低。绝对意义上的桥，就是度数为无穷的局部桥。按照与上文相同的逻辑，只有弱关系才可能成为局部桥。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Suppose, now, that we adopt Davis's suggestion that "in interpersonal flows of most any sort the probability that 'whatever it is' will flow from person <em>i</em> to person <em>j</em> is (α) directly proportional to the number of all-positive (friendship) paths connecting <em>i</em> and <em>j</em>; and (β) inversely proportional to the length of such paths" (1969, p. 549).<span class="note">8 Though this assumption seems plausible, it is by no means self-evident. Surprisingly little empirical evidence exists to support or refute it.｜注8：尽管这一假定看似合理，它却绝非不证自明。令人惊讶的是，支持或反驳它的经验证据都出奇地少。</span> The significance of weak ties, then, would be that those which are local bridges create more, and shorter, paths. Any given tie may, hypothetically, be removed from a network; the number of paths broken and the changes in average path length resulting between arbitrary pairs of points (with some limitation on length of path considered) can then be computed. The contention here is that removal of the average weak tie would do more "damage" to transmission probabilities than would that of the average strong one.</div>
+  <div class="zh">现在，假设我们采纳戴维斯的如下主张："在几乎任何类型的人际流动中，'无论流动的是什么'从人 <em>i</em> 流向人 <em>j</em> 的概率，（α）与连接 <em>i</em> 和 <em>j</em> 的全正向（友谊）路径的条数成正比；（β）与这些路径的长度成反比"（1969, p. 549）。<span class="note">注8：尽管这一假定看似合理，它却绝非不证自明。令人惊讶的是，支持或反驳它的经验证据都出奇地少。</span>那么，弱关系的意义就在于：那些构成局部桥的弱关系，创造出更多、也更短的路径。假设性地，任何一个给定的关系都可以从网络中被移除；由此便可计算出被切断的路径数目，以及在任意点对之间（对所考虑的路径长度作某种限定）平均路径长度所发生的变化。本文的主张是：移除一条普通的弱关系，对传播概率所造成的"损害"，要大于移除一条普通的强关系。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Intuitively speaking, this means that whatever is to be diffused can reach a larger number of people, and traverse greater social distance (i.e., path length)<span class="note">10 We may define the "social distance" between two individuals in a network as the number of lines in the shortest path from one to another. This is the same as the definition of "distance" between points in graph theory (Harary et al. 1965, pp. 32–33, 138–41). The exact role of this quantity in diffusion and epidemic theory is discussed by Solomonoff and Rapoport (1951).｜注10：我们可以把一个网络中两个人之间的"社会距离"定义为从一人到另一人的最短路径中所含连线的数目。这与图论中两点之间"距离"的定义相同（Harary et al. 1965, pp. 32–33, 138–41）。关于这一数量在扩散理论与流行病理论中的确切作用，参见 Solomonoff and Rapoport (1951)。</span> when passed through weak ties rather than strong. If one tells a rumor to all his close friends, and they do likewise, many will hear the rumor a second and third time, since those linked by strong ties tend to share friends. If the motivation to spread the rumor is dampened a bit on each wave of retelling, then the rumor moving through strong ties is much more likely to be limited to a few cliques than that going via weak ones; bridges will not be crossed.<span class="note">11 If a damping effect is not specified, the whole population would hear the rumor after a sufficiently large number of retellings, since few real networks include totally self-contained cliques. The effective difference between using weak and strong ties, then, is one of people reached per unit of (ordinal) time. This could be called "velocity" of transmission. I am indebted to Scott Feld for this point.｜注11：如果不设定衰减效应，那么经过足够多次的转述之后，全体人口都会听到这则谣言，因为真实的网络中很少包含完全自我封闭的派系。这样一来，使用弱关系与强关系的实际差别，就在于每单位（序数）时间内所触达的人数。这可以称为传播的"速度"。这一点我受惠于斯科特·费尔德（Scott Feld）。</span></div>
+  <div class="zh">直观地说，这意味着：无论要扩散的是什么，经由弱关系而非强关系来传递时，它都能触达更多的人数，并跨越更大的社会距离（即路径长度）。<span class="note">注10：我们可以把一个网络中两个人之间的"社会距离"定义为从一人到另一人的最短路径中所含连线的数目……（全译见左栏）</span>如果一个人把谣言告诉自己所有的密友，后者也如法炮制，那么许多人会第二次、第三次听到这则谣言，因为由强关系相连的人往往共享朋友。如果传播谣言的动机在每一轮转述中都稍有衰减，那么经由强关系传播的谣言，就比经由弱关系传播的谣言更有可能被局限于少数几个派系（cliques）之内；桥将不会被跨越。<span class="note">注11：如果不设定衰减效应，那么经过足够多次的转述之后，全体人口都会听到这则谣言……（全译见左栏）</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">Since sociologists and anthropologists have carried out many hundreds of diffusion studies—Rogers's 1962 review dealt with 506—one might suppose that the above claims could easily be put to test. But this is not so, for several reasons. To begin with, though most diffusion studies find that personal contacts are crucial, many undertake no sociometric investigation. (Rogers [1962] discusses this point.) When sociometric techniques are used, they tend to discourage the naming of those weakly tied to the respondent by sharply limiting the numbers of choices allowed. Hence, the proposed importance of weak ties in diffusion is not measured. Even when more sociometric information is collected there is almost never an attempt to directly retrace the exact interpersonal paths traversed by an (idea, rumor, or) innovation. More commonly, the time when each individual adopted the innovation is recorded, as is the number of sociometric choices he received from others in the study. Those receiving many choices are characterized as "central," those with few as "marginal"; this variable is then correlated with time of adoption and inferences made about what paths were probably followed by the innovation.<span class="note">9 In a more comprehensive treatment it would be useful to consider to what extent a set of weak ties may be considered to have bridging functions. This generalization requires a long, complex discussion and is not attempted here (see Harary et al. 1965, pp. 211–16).｜注9：在一种更为全面的处理中，考察一组弱关系在多大程度上可被视为具有架桥功能，将是有益的。这一推广需要冗长而复杂的讨论，本文不作尝试（见 Harary et al. 1965, pp. 211–16）。</span></div>
+  <div class="zh">社会学家与人类学家已经完成了数以百计的扩散研究——罗杰斯（Rogers）1962 年的综述就涉及 506 项——人们或许会以为，上述论断可以轻易地得到检验。但事实并非如此，原因有若干。首先，尽管多数扩散研究发现个人接触至关重要，但许多研究并未进行任何社会计量学的调查。（Rogers [1962] 讨论了这一点。）即便使用了社会计量技术，由于严格限定被允许的选择数目，这类技术也往往阻碍受访者说出那些与自己关系较弱的人。因此，本文所提出的弱关系在扩散中的重要性并未被测量到。即便收集了更多的社会计量信息，也几乎从未有人试图直接回溯某一（观念、谣言或）创新所实际经由的精确人际路径。更常见的做法是：记录每个人采纳该创新的时间，以及他从研究中其他成员那里获得的社会计量选择的数目。获得许多选择的人被称为"中心的"（central），获得很少选择的人被称为"边缘的"（marginal）；然后把这一变量与采纳时间做相关分析，并据此推断该项创新可能沿着哪些路径传播。<span class="note">注9：在一种更为全面的处理中，考察一组弱关系在多大程度上可被视为具有架桥功能，将是有益的……（全译见左栏）</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">One point of controversy in diffusion studies can be related to my argument. Some have indicated that early innovators are marginal, that they "underconform to norms to such a degree that they are perceived as highly deviant" (Rogers 1962, p. 197). Others (e.g., Coleman, Katz, and Menzel [1966] on the adoption of a new drug by doctors) find that those named more frequently adopt an innovation substantially earlier. Becker (1970) tries to resolve the question of whether early innovators are "central" or "marginal" by referring to the "perceived risks of adoption of a given innovation." His study of public health innovations shows that when a new program is thought relatively safe and uncontroversial (as with the drug of Coleman et al.), central figures lead in its adoption; otherwise, marginal ones do (p. 273). He explains the difference in terms of a greater desire of "central" figures to protect their professional reputation.</div>
+  <div class="zh">扩散研究中的一处争议，可以与我的论证联系起来。一些研究者指出，早期的创新者是边缘人物，他们"对规范的遵从不足到了这样一种程度，以至于被视为高度偏离常规"（Rogers 1962, p. 197）。另一些研究者（例如 Coleman, Katz, and Menzel [1966] 关于医生采纳新药的研究）则发现，被提名次数更多的人，采纳创新的时间明显更早。贝克尔（Becker, 1970）试图借助"对采纳某一给定创新所感知到的风险"来解决早期创新者究竟是"中心的"还是"边缘的"这一问题。他对公共卫生创新的研究表明：当一项新计划被认为相对安全且无争议时（如 Coleman 等人所研究的那种药物），中心人物在采纳上领先；否则，领先的就是边缘人物（p. 273）。他用"中心"人物更强烈地希望维护自己职业声誉这一点来解释这种差异。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Kerckhoff, Back, and Miller (1965) reach a similar conclusion in a different type of study. A Southern textile plant had been swept by "hysterical contagion": a few, then more and more workers, claiming bites from a mysterious "insect," became nauseous, numb, and weak, leading to a plant shutdown. When the affected workers were asked to name their three best friends, many named one another, but the very earliest to be stricken were social isolates, receiving almost no choices. An explanation, compatible with Becker's, is offered: since the symptoms might be thought odd, early "adopters" were likely to be found among the marginal, those less subject to social pressures. Later, "it is increasingly likely that some persons who are socially integrated will be affected. . . . The contagion enters social networks and is disseminated with increasing rapidity" (p. 13). This is consistent with Rogers's comment that while the first adopters of innovations are marginal, the next group, "early adopters," "are a more integrated part of the local social system than the innovators" (1962, p. 183).</div>
+  <div class="zh">柯克霍夫、巴克与米勒（Kerckhoff, Back, and Miller 1965）在一项不同类型的研究中得出了相似的结论。南方一家纺织厂曾爆发"癔症性传染"（hysterical contagion）：先是少数、随后越来越多的工人声称被一种神秘的"昆虫"咬伤，出现恶心、麻木和虚弱症状，最终导致工厂停工。当要求受影响的工人说出他们最好的三位朋友时，许多人彼此提名；但最早发病的那些人却是社会孤立者，几乎没有人选择他们。作者给出了一个与贝克尔相容的解释：由于这些症状可能被视为怪异，早期的"采纳者"很可能出现在边缘人物之中，也就是那些较少受到社会压力影响的人。到后来，"一些社会融入程度较高的人受到影响的可能性越来越大……这种传染进入社会网络，并以越来越快的速度传播开来"（p. 13）。这与罗杰斯的评论相一致：虽然创新的首批采纳者是边缘人物，但紧接着的"早期采纳者"群体"比创新者更深度地融入了当地社会系统"（1962, p. 183）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">"Central" and "marginal" individuals may well be motivated as claimed; but if the marginal are genuinely so, it is difficult to see how they can ever spread innovations successfully. We may surmise that since the resistance to a risky or deviant activity is greater than to a safe or normal one, a larger number of people will have to be exposed to it and adopt it, in the early stages, before it will spread in a chain reaction. Individuals with many weak ties are, by my arguments, best placed to diffuse such a difficult innovation, since some of those ties will be local bridges.<span class="note">12 These individuals are what is often called, in organizational analysis, "liaison persons," though their role here is different from the one usually discussed. (Cf. the concept in graph theory of a "cut point"—one which, if removed from a graph, disconnects one part from another [Harary 1965].) In general, a bridge has one liaison person on each side, but the existence of a liaison person does not imply that of a bridge. For local bridges, the concept of local liaisons could be developed. In a more microscopically oriented discussion I would devote more time to the liaison role. For now, I only point out that, under the present assumptions, one can be a liaison between two network sectors only if all his ties into one or both are weak.｜注12：这些个体正是组织分析中常说的"联络人"（liaison persons），尽管他们在此处的角色与通常所讨论的不同。（比较图论中"割点"（cut point）的概念——即从图中移除后会使一部分与另一部分断开的点 [Harary 1965]。）一般而言，一座桥在每一侧各有一个联络人，但联络人的存在并不意味着桥的存在。对于局部桥，可以发展出"局部联络人"的概念。若以更微观的取向展开讨论，我会花更多篇幅来探讨联络人角色。眼下我只指出：在本文的假定之下，一个人只有在通往两个网络部门中至少一个（或两个）部门的所有关系都是弱关系时，才可能成为这两个部门之间的联络人。</span> An initially unpopular innovation spread by those with few weak ties is more likely to be confined to a few cliques, thus being stillborn and never finding its way into a diffusion study.</div>
+  <div class="zh">"中心的"与"边缘的"个体很可能确实如所说那样被驱动；但如果边缘人物真的是边缘的，那就很难看出他们究竟如何能够成功地传播创新。我们可以推测：由于对一项有风险的或偏离常规的行为的抵制，要大于对一项安全的或正常的行为的抵制，因此在早期阶段，必须有更多的人接触到它并采纳它，它才会以链式反应的方式扩散开来。按照我的论证，拥有许多弱关系的人最适于扩散这样一种难以推开的创新，因为这些弱关系中有一些会成为局部桥。<span class="note">注12：这些个体正是组织分析中常说的"联络人"（liaison persons）……（全译见左栏）</span>相反，一项起初并不受欢迎的创新，若由弱关系很少的人来传播，就更有可能被局限于少数几个派系之内，从而胎死腹中，永远不会被纳入任何扩散研究。</div>
+</div>
+
+<div class="pair">
+  <div class="en">That the "marginal" innovators of diffusion studies might actually be rich in weak ties is possible, given the usual sociometric technique, but in most cases this is purely speculative. Kerckhoff and Back, however, in a later more detailed analysis of the hysteria incident, indicate that besides asking about one's "three best friends," they also asked with whom workers ate, worked, shared car pools, etc. They report that five of the six workers earliest affected "are social isolates when friendship choices are used as the basis of analysis. Only 1 of the 6 is mentioned as a friend by anyone in our sample. This is made even more striking when we note that these 6 women are mentioned with considerable frequency when other bases for choice are used. In fact, they are chosen more frequently on a 'nonfriendship' basis than are the women in any of the other categories" (1968, p. 112).</div>
+  <div class="zh">考虑到通常使用的社会计量技术，扩散研究中的那些"边缘"创新者实际上可能拥有丰富的弱关系——这是可能的，但在大多数情况下这纯属推测。不过，柯克霍夫与巴克在后来对这起癔症事件的更详细分析中指出，除询问"最好的三位朋友"之外，他们还询问了工人与谁一起吃饭、工作、拼车等等。他们报告说，最早受影响的六名工人中有五人"在以友谊选择作为分析基础时是社会孤立者。在我们的样本中，六人中只有一人被任何人提名为朋友。而当我们注意到，在使用其他选择依据时，这 6 名女性被提及的频率相当高，这一点就更令人惊异了。事实上，她们在'非友谊'基础上被选择的频率，高于任何其他类别中的女性"（1968, p. 112）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">This finding lends credence to the weak-tie argument, but is inconclusive. A somewhat different kind of diffusion study offers more direct support: the "small-world" investigations of Milgram and his associates. The name of these studies stems from the typical comment of newly introduced individuals who discover some common acquaintance; this situation is generalized in an attempt to measure, for arbitrarily chosen pairs of individuals in the United States, how long a path of personal contacts would be needed to connect them. A booklet is given to randomly designated senders who are asked to forward it toward some named target person, via someone the sender knows personally who would be more likely than himself to know the target. The new recipient then advances the booklet similarly; eventually it reaches the target or someone fails to send it on. The proportion of such chains completed has ranged from 12% to 33% in different studies, and the number of links in completed chains has ranged from two to 10, averaging between five and eight (Milgram 1967; Travers and Milgram 1969; Korte and Milgram 1970).</div>
+  <div class="zh">这一发现为弱关系论证提供了可信度，但并不具有决定性。一类略有不同的扩散研究提供了更为直接的支持：米尔格拉姆（Milgram）及其合作者的"小世界"（small-world）研究。这类研究的名称源于初次相识的人发现彼此有共同熟人时常发的感慨；这一情境被加以推广，用来测量：对美国境内任意选定的成对个体而言，需要多长的个人接触路径才能把他们连接起来。研究者把一个小册子交给随机指定的发送者，请他们把小册子转寄给某个指定的目标人物，方式是经由发送者本人认识、且比自己更可能认识该目标的人。新的收件人再以同样的方式推进；最终，小册子要么抵达目标，要么有人未能继续转寄。在不同的研究中，此类链条的完成率从 12% 到 33% 不等；已完成链条中的环节数从 2 到 10 不等，平均在 5 到 8 之间（Milgram 1967; Travers and Milgram 1969; Korte and Milgram 1970）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Each time someone forwards a booklet he also sends a postcard to the researchers, indicating, among other things, the relationship between himself and the next receiver. Two of the categories which can be chosen are "friend" and "acquaintance." I will assume that this corresponds to "strong" and "weak" ties. In one of the studies, white senders were asked to forward the booklet to a target who was Negro. In such chains, a crucial point was the first sending of the booklet from a white to a Negro. In 50% of the instances where the white described this Negro as an "acquaintance," the chain was ultimately completed; completion rate fell to 26%, however, when the white sent the booklet to a Negro "friend." (My computation, based on unpublished data kindly supplied by Charles Korte. See Korte [1967] and Korte and Milgram [1970].) Thus, weaker interracial ties can be seen to be more effective in bridging social distance.</div>
+  <div class="zh">每当有人转寄小册子时，他还要给研究者寄一张明信片，说明（除其他事项外）自己与下一位接收者之间的关系。可供选择的类别中有两项是"朋友"与"熟人"。我将假定这分别对应"强"关系与"弱"关系。在其中一项研究中，白人发送者被要求把小册子转寄给一位黑种人目标。在这类链条中，关键的一环是小册子第一次由白人转给黑人的那一步。在白人把这位黑种人描述为"熟人"的情形中，有 50% 的链条最终完成；然而，当白人把小册子寄给一位黑人"朋友"时，完成率下降到 26%。（这一计算由我完成，依据是查尔斯·科特（Charles Korte）惠予提供的未发表数据。参见 Korte [1967] 与 Korte and Milgram [1970]。）由此可见，较弱的种族间关系在跨越社会距离方面更为有效。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Another relevant study, by Rapoport and Horvath (1961), is not exactly one of diffusion but is closely related in that it traces out paths along which diffusion could take place. They asked each individual in a Michigan junior high school (<em>N</em> = 851) to list his eight best friends in order of preference. Then, taking a number of random samples from the group (sample size, an arbitrary number, was nine), they traced out, for each sample, and averaged over all the samples, the total number of people reached by following along the network of first and second choices. That is, the first and second choices of each sample member were tabulated, then the first and second choices of these people were added in, etc., counting, at each remove, only names not previously chosen, and continuing until no new people were reached. The same procedure was followed using second and third choices, third and fourth, etc., up to seventh and eighth. (The theoretical connection of this tracing procedure to diffusion is discussed by Rapoport [1953a, 1953b, and especially 1954].)</div>
+  <div class="zh">另一项相关研究由拉波波特与霍瓦特（Rapoport and Horvath 1961）完成，它严格说来并非一项扩散研究，但由于它描摹出了扩散得以发生的路径，因而与之密切相关。他们要求密歇根州一所初中的每一个人（<em>N</em> = 851）按偏好顺序列出自己最好的八位朋友。然后，他们从该群体中抽取若干随机样本（样本量为一个任意给定的数字，即 9），对每个样本都沿着"第一选择与第二选择"构成的网络进行追踪，并在所有样本上取平均，得出所触达的总人数。具体而言：先列出每个样本成员的第一、第二选择，再把这些人的第一、第二选择加入进来，如此等等；在每一级上只计入此前未被选择过的名字，一直持续到不再有新的人被触达为止。同样的程序也用于第二与第三选择、第三与第四选择，直至第七与第八选择。（关于这一追踪程序与扩散之间的理论联系，参见 Rapoport [1953a, 1953b，尤其是 1954]。）</div>
+</div>
+
+<div class="pair">
+  <div class="en">The smallest total number of people were reached through the networks generated by first and second choices—presumably the strongest ties—and the largest number through seventh and eighth choices. This corresponds to my assertion that more people can be reached through weak ties. A parameter in their mathematical model of the sociogram, designed to measure, approximately, the overlap of acquaintance circles, declined monotonically with increasing rank order of friends.<span class="note">13 This parameter, θ, measures such overlap in the following sense: it is zero in a random net—one in which individuals choose others at random—and is one in a net made up entirely of cliques disconnected each from every other. Intermediate values of θ, however, do not have a good intuitive interpretation in terms of individuals, but only with reference to the particular mathematical model defining the parameter; thus it does not correspond precisely to my arguments about friendship overlap.｜注13：这一参数 θ 在如下意义上度量这种重叠：在随机网络（即个体随机选择他人的网络）中它为零；在完全由彼此断开的派系构成的网络中它为一。然而，θ 的中间取值在个体层面并无良好的直觉解释，只能参照定义该参数的特定数学模型来理解；因此它并不与我的友谊重叠论证精确对应。</span></div>
+  <div class="zh">经由"第一与第二选择"所生成的网络触达的人数最少——这大概是关系最强的——而经由"第七与第八选择"触达的人数最多。这与我的论断相一致：通过弱关系可以触达更多的人。在他们关于社会关系图的数学模型中，有一个参数被设计用来近似地测量熟人圈子的重叠程度；该参数随着朋友序位的升高而单调下降。<span class="note">注13：这一参数 θ 在如下意义上度量这种重叠……（全译见左栏）</span></div>
+</div>
+
+<!-- 3. WEAK TIES IN EGOCENTRIC NETWORKS -->
+<div class="section-label">Section 3 · 第三节</div>
+<h2>WEAK TIES IN EGOCENTRIC NETWORKS<span class="zh">自我中心网络中的弱关系</span></h2>
+
+<div class="pair">
+  <div class="en">In this section and the next, I want to discuss the general significance of the above findings and arguments at two levels: first that of individuals, then that of communities. These discussions make no pretense of being comprehensive; they are meant only to illustrate possible applications.</div>
+  <div class="zh">在本节与下一节中，我想要在两个层次上讨论上述发现与论证的一般意义：首先是个体层次，其次是社区层次。这些讨论并不自诩全面；它们仅仅旨在例示可能的应用。</div>
+</div>
+
+<div class="pair">
+  <div class="en">In recent years, a great deal of literature has appeared analyzing the impact on the behavior of individuals of the social networks in which they are imbedded. Some of the studies have emphasized the ways in which behavior is shaped and constrained by one's network (Bott 1957; Mayer 1961; Frankenberg 1965), others the ways in which individuals can manipulate these networks to achieve specific goals (Mayer 1966; Boissevain 1968; Kapferer 1969). Both facets are generally supposed to be affected by the structure of one's network. Bott argued that the crucial variable is that of whether one's friends tend to know one another ("close-knit" network) or not ("loose-knit" network). Barnes makes this dichotomy into a continuous variable by counting the number of ties observed in the network formed by ego and his friends and dividing it by the ratio of possible ones; this then corresponds to what is often called network "density" (Barnes 1969; Tilly 1969).<span class="note">14 But if the crucial question is really whether ego's friends know each other, this measure should probably be computed after ego and his ties have been subtracted from the network; distortions caused by failure to do so will be especially great in small networks. It is important to note, also, that in mon egocentric networks, there is no simple correspondence between density and any "average" measure of the extent to which the various egos have friends who know one another. "Density," as used here, should not be confused with the "axone density" of Rapoport's models—the number of choices issuing from each node of a network.｜注14：然而，如果关键问题确实在于自我的朋友们是否彼此相识，那么这一指标或许应当在把自我及其关系从网络中扣除之后再计算；若不如此，所造成的扭曲在小网络中会格外严重。还有一点需要注意：在一元（mon-）自我中心网络中，密度与任何关于"各个自我拥有彼此相识的朋友的程度"的"平均"测量之间，并不存在简单的对应关系。这里所用的"密度"，不应与拉波波特模型中的"轴突密度"（axone density）——即从网络中每个节点发出的选择数目——相混淆。</span></div>
+  <div class="zh">近年来出现了大量文献，分析个体所嵌入的社会网络对其行为的影响。其中一些研究强调个体的行为如何被其网络所塑造与约束（Bott 1957; Mayer 1961; Frankenberg 1965），另一些则强调个体如何能够操纵这些网络以实现特定目标（Mayer 1966; Boissevain 1968; Kapferer 1969）。一般认为，这两个方面都受到个人网络结构的影响。博特（Bott）主张，关键变量在于：一个人的朋友们是否倾向于彼此相识（即"紧密编织的"网络，close-knit network），或者并非如此（即"松散编织的"网络，loose-knit network）。巴恩斯（Barnes）把这一二分法转化为一个连续变量，其做法是：计算在由自我（ego）及其朋友构成的网络中所观察到的关系数目，再除以可能存在的关系数之比；这便对应于通常所称的网络"密度"（density）（Barnes 1969; Tilly 1969）。<span class="note">注14：然而，如果关键问题确实在于自我的朋友们是否彼此相识，那么这一指标或许应当在把自我及其关系从网络中扣除之后再计算……（全译见左栏）</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">Epstein (1969) points out, however, that different parts of ego's network may have different density. He calls those with whom one "interacts most intensely and most regularly, and who are therefore also likely to come to know one another," the "effective network"; the "remainder constitute the extended network" (pp. 110–11). This is close to saying, in my terms, that one's strong ties form a dense network, one's weak ties a less dense one. I would add that one's weak ties which are not local bridges might as well be counted with the strong ties, to maximize separation of the dense from the less dense network sectors.</div>
+  <div class="zh">然而，爱泼斯坦（Epstein, 1969）指出，自我网络的不同部分可能具有不同的密度。他把那些"与之互动最为强烈、最为规律，因而彼此也最可能相识"的人称为"有效网络"（effective network）；"其余的人构成扩展网络"（extended network）（pp. 110–11）。用我的术语来说，这几乎就等于说：一个人的强关系构成一个高密度的网络，其弱关系构成一个密度较低的网络。我还要补充一点：一个人的弱关系中那些并非局部桥的部分，不妨与强关系归为一类，以便最大程度地把高密度的网络部门与低密度的网络部门区分开来。</div>
+</div>
+
+<div class="pair">
+  <div class="en">One point on which there is no general agreement is whether ego's network should be treated as composed only of those to whom he is tied directly, or should include the contacts of his contacts, and/or others. Analyses stressing encapsulation of an individual by his network tend to take the former position, those stressing manipulation of networks, the latter, since information or favors available through direct contacts may depend on who their contacts are. I would argue that by dividing ego's network into that part made up of strong and nonbridging weak ties on the one hand, and that of bridging weak ties on the other, both orientations can be dealt with. Ties in the former part should tend to be to people who not only know one another, but who also have few contacts not tied to ego as well. In the "weak" sector, however, not only will ego's contacts not be tied to one another, but they will be tied to individuals not tied to ego. Indirect contacts are thus typically reached through ties in this sector;</div>
+  <div class="zh">有一个问题目前尚无普遍共识：自我的网络究竟应当被视为仅由与他直接关联的人所构成，还是应当包括其联系人的联系人、和／或其他人。强调个体被其网络所包裹（encapsulation）的分析往往采取前一种立场，而强调网络操纵的分析则采取后一种立场，因为经由直接联系人可获得的信息或帮助，可能取决于这些联系人的联系人是谁。我要论证的是：把自我的网络划分为两个部分——一部分由强关系与不具架桥作用的弱关系构成，另一部分由具有架桥作用的弱关系构成——两种取向便都能得到处理。前一部分中的关系，其对象往往不仅彼此相识，而且本身也很少有未与自我相连的外部联系人。而在"弱"的一端，不仅自我的联系人彼此之间没有关联，而且他们还会与未同自我关联的人相连。因此，间接联系人通常正是通过这一部门中的关系而被触达的；</div>
+</div>
+
+<div class="pair">
+  <div class="en">...such ties are then of importance not only in ego's manipulation of networks, but also in that they are the channels through which ideas, influences, or information socially distant from ego may reach him. The fewer indirect contacts one has the more encapsulated he will be in terms of knowledge of the world beyond his own friendship circle; thus, bridging weak ties (and the consequent indirect contacts) are important in both ways.</div>
+  <div class="zh">……因而这类关系的重要性不仅体现在自我对网络的操纵上，也体现在它们是各种观念、影响或信息得以从社会距离遥远之处抵达自我的渠道。一个人所拥有的间接联系人越少，他在关于自身友谊圈之外世界的知识方面就越是被包裹；因此，具有架桥作用的弱关系（以及随之而来的间接联系人）在这两方面都颇为重要。</div>
+</div>
+
+<div class="pair">
+  <div class="en">I will develop this point empirically by citing some results from a labor-market study I have recently completed. Labor economists have long been aware that American blue-collar workers find out about new jobs more through personal contacts than by any other method. (Many studies are reviewed by Parnes 1954, chap. 5.) Recent studies suggest that this is also true for those in professional, technical, and managerial positions (Shapero, Howell, and Tombaugh 1965; Brown 1967; Granovetter 1970). My study of this question laid special emphasis on the nature of the tie between the job changer and the contact person who provided the necessary information.</div>
+  <div class="zh">我将引用我最近完成的一项劳动力市场研究中的一些结果，来对这一点作经验性的展开。劳动经济学家早已注意到，美国蓝领工人获知新工作的途径，更多地是通过个人接触，而非任何其他方法。（Parnes 1954 第 5 章综述了大量此类研究。）近期的研究表明，对于从事专业、技术和管理职位的人而言，情况同样如此（Shapero, Howell, and Tombaugh 1965; Brown 1967; Granovetter 1970）。我对这一问题的研究，特别强调了换工作者与提供必要信息的联系人之间关系的性质。</div>
+</div>
+
+<div class="pair">
+  <div class="en">In a random sample of recent professional, technical, and managerial job changers living in a Boston suburb, I asked those who found a new job through contacts how often they saw the contact around the time that he passed on job information to them. I will use this as a measure of tie strength.<span class="note">15 Although this corresponds only to the first of the four dimensions in my definition, supplementary anecdotal evidence from interviews makes it likely that, in this case, the entire definition is satisfied by this measure. At the time of research, it had not occurred to me that tie strength would be a useful variable.｜注15：尽管这仅对应于我的定义中四个维度中的第一个，但来自访谈的补充性轶事证据表明，在本例中这一测量很可能满足了整个定义。在做这项研究时，我尚未想到关系强度会是一个有用的变量。</span> A natural a priori idea is that those with whom one has strong ties are more motivated to help with job information. Opposed to this greater motivation are the structural arguments I have been making: those to whom we are weakly tied are more likely to move in circles different from our own and will thus have access to information different from that which we receive.</div>
+  <div class="zh">在一个居住于波士顿郊区的、近期更换过工作的专业、技术与管理人员的随机样本中，我向那些通过联系人找到新工作的人询问：在联系人向他们传递工作信息的那段时间前后，他们与这位联系人见面的频率如何。我将以此作为关系强度的测量。<span class="note">注15：尽管这仅对应于我的定义中四个维度中的第一个，但来自访谈的补充性轶事证据表明，在本例中这一测量很可能满足了整个定义……（全译见左栏）</span>一种自然的先验想法是：与自己有强关系的人，更有动机提供工作信息上的帮助。与这种更强的动机相对立的，则是我一直在提出的结构性论证：与我们关系较弱的人，更可能活动于与我们不同的圈子之中，因而能够获得我们所接收不到的信息。</div>
+</div>
+
+<div class="pair">
+  <div class="en">I have used the following categories for frequency of contact: often = at least twice a week; occasionally = more than once a year but less than twice a week; rarely = once a year or less. Of those finding a job through contacts, 16.7% reported that they saw their contact often at the time, 55.6% said occasionally, and 27.8% rarely (<em>N</em> = 54).<span class="note">16 The numbers reported are small because they represent a random subsample of 100, who were interviewed personally, of the total sample of 282. The personal interview allowed more detailed questioning. Comparisons between the mail sample and the interview sample on the large number of items which were put to both show almost no significant differences; this suggests that results observed in the smaller sample on those items put to it alone would not be much different in the mail sample.｜注16：所报告的数字较小，是因为它们来自总样本 282 人中被亲自访谈的 100 人随机子样本。个人访谈允许更细致的提问。在同时向两个样本提出的众多题项上，邮寄样本与访谈样本之间的比较几乎没有显示出显著差异；这表明，在较小样本中对其单独提出的那些题项上观察到的结果，在邮寄样本中也不会有太大不同。</span> The skew is clearly to the weak end of the continuum, suggesting the primacy of structure over motivation.</div>
+  <div class="zh">我对接触频率使用了如下类别：经常 = 每周至少两次；偶尔 = 每年多于一次但每周少于两次；很少 = 每年一次或更少。在那些通过联系人找到工作的人当中，16.7% 报告说他们当时与联系人经常见面，55.6% 说偶尔见面，27.8% 说很少见面（<em>N</em> = 54）。<span class="note">注16：所报告的数字较小，是因为它们来自总样本 282 人中被亲自访谈的 100 人随机子样本……（全译见左栏）</span>分布明显偏向这一连续统的弱端，这表明结构因素优先于动机因素。</div>
+</div>
+
+<div class="pair">
+  <div class="en">In many cases, the contact was someone only marginally included in the current network of contacts, such as an old college friend or a former workmate or employer, with whom sporadic contact had been maintained (Granovetter 1970, pp. 76–80). Usually such ties had not even been very strong when first forged. For work-related ties, respondents almost invariably said that they never saw the person in a nonwork context.<span class="note">17 Often when I asked respondents whether a friend had told them about their current job, they said, "Not a friend, an acquaintance." It was the frequency of this comment which suggested this section of the paper to me.｜注17：当我问受访者是否有朋友告诉他们现在这份工作时，他们常说："不是朋友，是个熟人。"正是这句话出现的频率，提示我写成本文的这一节。</span> Chance meetings or mutual friends operated to reactivate such ties. It is remarkable that people receive crucial information from individuals whose very existence they have forgotten.<span class="note">18 Donald Light has suggested to me an alternative reason to expect predominance of weak ties in transfer of job information. He reasons that most of any given person's ties are weak, so that we should expect, on a "random" model, that most ties through which job information flows should be weak. Since baseline data on acquaintance networks are lacking, this objection remains inconclusive. Even if the premise were correct, however, one might still expect that greater motivation of close friends would overcome their being outnumbered. Different assumptions yield different "random" models; it is not clear which one should be accepted as a starting point. One plausible such model would expect information to flow through ties in proportion to the time expended in interaction; this model would predict much more information via strong ties than one which merely counted all ties equally.｜注18：唐纳德·莱特（Donald Light）向我提出了另一种理由，用以预期弱关系在工作信息传递中占主导。他推论说，任何给定之人的大多数关系都是弱关系，因此按照"随机"模型，我们应当预期工作信息所流经的大多数关系都是弱的。由于缺乏关于熟人网络的基线数据，这一反驳尚无定论。然而，即便这一前提正确，人们仍可预期密友更强的动机会压倒其数量上的劣势。不同的假定会给出不同的"随机"模型；究竟哪一个应被接受为出发点，并不清楚。一种看似合理的模型会预期信息流经各关系的数量与互动所耗时间成比例；这一模型所预测的经由强关系传递的信息量，要远多于那种仅仅把所有关系统同等计数的模型。</span></div>
+  <div class="zh">在许多案例中，那位联系人只是勉强被包含在当前的联系人网络之中，例如一位大学时代的老友、一位从前的同事或雇主，与之保持着零星的接触（Granovetter 1970, pp. 76–80）。这类关系在最初缔结时通常甚至并不很强。就与工作相关的关系而言，受访者几乎无一例外地说，他们从未在非工作场合见过那个人。<span class="note">注17：当我问受访者是否有朋友告诉他们现在这份工作时，他们常说："不是朋友，是个熟人。"……（全译见左栏）</span>偶然的相遇或共同的朋友起到了重新激活这类关系的作用。值得注意的是，人们竟然会从那些他们早已忘掉其存在的个体那里获得关键的信息。<span class="note">注18：唐纳德·莱特（Donald Light）向我提出了另一种理由，用以预期弱关系在工作信息传递中占主导……（全译见左栏）</span></div>
+</div>
+
+<div class="pair">
+  <div class="en">I also asked respondents where their contacts got the information they transmitted. In most cases, I traced the information to its initial source. I had expected that, as in the diffusion of rumors or diseases, long paths would be involved. But in 39.1% of the cases information came directly from the prospective employer, whom the respondent already knew; 45.3% said that there was one intermediary between himself and the employer; 12.5% reported two; and 3.1% more than two (<em>N</em> = 64). This suggests that for some important purposes it may be sufficient to discuss, as I have, the egocentric network made up of ego, his contacts, and their contacts. Had long information paths been involved, large numbers might have found out about any given job, and no particular tie would have been crucial.</div>
+  <div class="zh">我还询问了受访者，他们的联系人所传递的信息是从哪里得来的。在大多数案例中，我都把信息追溯到了其最初来源。我原本预期，如同谣言或疾病的扩散那样，会涉及很长的路径。但事实上，在 39.1% 的案例中，信息直接来自未来的雇主，而受访者本来就认识这位雇主；45.3% 的人说，在自己与雇主之间有一个中间人；12.5% 报告说有两个；3.1% 超过两个（<em>N</em> = 64）。这表明，对于某些重要目的而言，像我这样只讨论由自我、其联系人以及这些联系人的联系人所构成的自我中心网络，或许就已经足够了。倘若涉及的是很长的的信息路径，那么可能会有大批人得知任何一份特定的工作，从而不会有任何一条特定的关系显得至关重要。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Such a model of job-information flow actually does correspond to the economists' model of a "perfect" labor market. But those few who did acquire information through paths with more than one intermediary tended to be young and under the threat of unemployment; influence was much less likely to have been exerted by their contact on their behalf. These respondents were, in fact, more similar to those using formal intermediaries (agencies, advertisements) than to those hearing through short paths: both of the former are badly placed and dissatisfied in the labor market, and both receive information without influence. Just as reading about a job in the newspaper affords one no recommendation in applying for it, neither does it to have heard about it fifth hand.</div>
+  <div class="zh">这样一种工作信息流动的模型，实际上确实对应于经济学家的"完全"劳动力市场模型。然而，那些确实经由包含一个以上中间人的路径获得信息的少数人，往往是年轻人，并且面临失业的威胁；他们的联系人也不大可能代表他们施加影响。事实上，这些受访者更接近于那些使用正式中介（职业介绍所、广告）的人，而不是那些经由短路径听到消息的人：前者在劳动力市场中都处境不佳且心怀不满，而且都只是获得了信息而没有获得影响。正如从报纸上读到一份工作并不能为申请者提供任何推荐，道听途说地第五手得知一份工作也一样不能。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The usual dichotomy between "formal" or mass procedures and diffusion through personal contacts may thus be invalid in some cases where, instead, the former may be seen as a limiting case of long diffusion chains. This is especially likely where information of instrumental significance is involved. Such information is most valuable when earmarked for one person.</div>
+  <div class="zh">因此，在"正式的"或大众化的程序与经由个人接触的扩散之间所作的通常二分，在某些情况下可能是无效的；在这些情况下，前者反而可以被视为长扩散链条的一个极限情形。当所涉信息具有工具性意义时，这种情况尤其可能出现。这类信息在被专门指定给某一个人时，价值最大。</div>
+</div>
+
+<div class="pair">
+  <div class="en">From the individual's point of view, then, weak ties are an important resource in making possible mobility opportunity. Seen from a more macroscopic vantage, weak ties play a role in effecting social cohesion. When a man changes jobs, he is not only moving from one network of ties to another, but also establishing a link between these. Such a link is often of the same kind which facilitated his own movement. Especially within professional and technical specialties which are well defined and limited in size, this mobility sets up elaborate structures of bridging weak ties between the more coherent clusters that constitute operative networks in particular locations. Information and ideas thus flow more easily through the specialty, giving it some "sense of community," activated at meetings and conventions. Maintenance of weak ties may well be the most important consequence of such meetings.</div>
+  <div class="zh">因此，从个体的角度来看，弱关系是使流动机会成为可能的一项重要资源。而从更为宏观的视角来看，弱关系在实现社会凝聚力方面扮演着角色。当一个人更换工作时，他不仅是从一个关系网络移动到另一个关系网络，同时也是在这两个网络之间建立起一条连接。这样一条连接，往往与促成他自己流动的那类连接属于同一种。尤其是在那些边界清晰、规模有限的专业与技术门类内部，这种流动会在特定的地点上构成运作网络的、较为连贯的簇（clusters）之间，建立起由具架桥作用的弱关系构成的精细结构。信息与观念由此得以更顺畅地在这一专业门类内部流动，赋予它某种"共同体感"（sense of community），并在各种会议与大会上被激活。维系弱关系，很可能正是这类会议最重要的结果。</div>
+</div>
+
+<!-- 4. WEAK TIES AND COMMUNITY ORGANIZATION -->
+<div class="section-label">Section 4 · 第四节</div>
+<h2>WEAK TIES AND COMMUNITY ORGANIZATION<span class="zh">弱关系与社区组织</span></h2>
+
+<div class="pair">
+  <div class="en">These comments about sense of community may remind us that in many cases it is desirable to deal with a unit of analysis larger than a single individual. I would like to develop my argument further by analyzing, in this section, why some communities organize for common goals easily and effectively whereas others seem unable to mobilize resources, even against dire threats. The Italian community of Boston's West End, for example, was unable to even form an organization to fight against the "urban renewal" which ultimately destroyed it. This seems especially anomalous in view of Gans's description of West End social structure as cohesive (1962).</div>
+  <div class="zh">上述关于共同体感的评论或许会提醒我们：在许多情况下，有必要处理一个大于单一个体的分析单位。在本节中，我想通过分析这样一个问题来进一步展开我的论证：为什么有些社区能够轻易而有效地为共同目标组织起来，而另一些社区却似乎无力动员资源，即便面对可怕的威胁也是如此。例如，波士顿西区（West End）的意大利裔社区，甚至未能组建起一个组织来对抗最终毁灭了它的"城市更新"（urban renewal）。鉴于甘斯（Gans, 1962）把西区的社会结构描述为具有凝聚力的，这一点就显得尤为反常。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Variations in culture and personality are often cited to explain such anomalies. Gans contrasts "lower"-, "working"-, and "middle"-class subcultures, concluding that only the last provides sufficient trust in leaders and practice in working toward common goals to enable formation of an effective organization. Thus, the working-class West End could not resist urban renewal (pp. 229–304). Yet, numerous well-documented cases show that some working-class communities have mobilized quite successfully against comparable or lesser threats (Dahl 1961, pp. 192–99; Keyes 1969; Davies 1966, chap. 4).<span class="note">19 This point was brought to my attention by Richard Wolfe.｜注19：这一点由理查德·沃尔夫（Richard Wolfe）提醒我注意。</span> I would suggest, as a sharper analytical tool, examination of the network of ties comprising a community to see whether aspects of its structure might facilitate or block organization.</div>
+  <div class="zh">文化与人格上的差异，常被援引来解释这类反常现象。甘斯对比了"下层"、"工人"与"中产"阶级的亚文化，得出结论说：只有后者才提供了对领导者充分的信任、以及为共同目标而工作的充分实践，从而使有效组织的形成成为可能。因此，工人阶级的西区无力抵抗城市更新（pp. 229–304）。然而，大量有据可查的案例表明，某些工人阶级社区曾针对相当或更小的威胁进行了相当成功的动员（Dahl 1961, pp. 192–99; Keyes 1969; Davies 1966, 第4章）。<span class="note">注19：这一点由理查德·沃尔夫（Richard Wolfe）提醒我注意。</span>我要提出的是一个更为锐利的分析工具：考察构成一个社区的关系网络，看看其结构的各个方面究竟是促进还是阻碍了组织。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Imagine, to begin with, a community completely partitioned into cliques, such that each person is tied to every other in his clique and to none outside. Community organization would be severely inhibited. Leafletting, radio announcements, or other methods could insure that everyone was aware of some nascent organization; but studies of diffusion and mass communication have shown that people rarely act on mass-media information unless it is also transmitted through personal ties (Katz and Lazarsfeld 1955; Rogers 1962); otherwise one has no particular reason to think that an advertised product or an organization should be taken seriously. Enthusiasm for an organization in one clique, then, would not spread to others but would have to develop independently in each one to insure success.</div>
+  <div class="zh">首先，设想一个被完全分割为若干派系的社区：每个人都与本派系内的所有人相连，而与派系外的任何人都不相连。这样的社区组织将受到严重抑制。散发传单、广播公告或其他方法，可以确保每个人都知晓某个新生组织的存在；但关于扩散与大众传播的研究已经表明，除非信息同时也经由个人关系传递，人们很少会根据大众媒介的信息采取行动（Katz and Lazarsfeld 1955; Rogers 1962）；否则，人们并没有特别的理由认为一个被宣传的产品或组织应当被认真对待。这样一来，某一派系中对某个组织的热情就不会扩散到其他派系，而必须在每一个派系中独立地生发出来，才能保证成功。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The problem of trust is closely related. I would propose that whether a person trusts a given leader depends heavily on whether there exist intermediary personal contacts who can, from their own knowledge, assure him that the leader is trustworthy, and who can, if necessary, intercede with the leader or his lieutenants on his behalf. Trust in leaders is integrally related to the capacity to predict and affect their behavior. Leaders, for their part, have little motivation to be responsive or even trustworthy toward those to whom they have no direct or indirect connection. Thus, network fragmentation, by reducing drastically the number of paths from any leader to his potential followers, would inhibit trust in such leaders. This inhibition, furthermore, would not be entirely irrational.</div>
+  <div class="zh">信任问题与之密切相关。我要提出的是：一个人是否信任某位特定的领导者，在很大程度上取决于是否存在这样一些中间性的个人接触——他们能够根据自己的了解，向他保证这位领导者值得信任，并且在必要时能够代表他向这位领导者或其副手说情。对领导者的信任，与预测并影响其行为的能力是内在相关的。就领导者一方而言，对于那些与自己没有任何直接或间接联系的人，他们几乎没有什么动机去作出回应，甚至没有什么动机去保持可信。因此，网络的碎片化（fragmentation）由于急剧减少了从任何一位领导者到其潜在追随者之间的路径数目，将会抑制人们对这类领导者的信任。而且，这种抑制并非完全非理性的。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Could the West End's social structure really have been of this kind? Note first that while the structure hypothesized is, by definition, extremely fragmented, this is evident only at a macroscopic level—from an "aerial view" of the network. The local phenomenon is cohesion. (Davis [1967] also noted this paradox, in a related context.) An analyst studying such a group by participant observation might never see the extent of fragmentation, especially if the cliques were not earmarked by ethnic, cultural, or other visible differences. In the nature of participant observation, one is likely to get caught up in a fairly restricted circle; a few useful contacts are acquired and relied on for introduction to others. The "problem of entry into West End society was particularly vexing," Gans writes. But eventually, he and his wife "were welcomed by one of our neighbors and became friends with them. As a result they invited us to many of their evening gatherings and introduced us to other neighbors, relatives and friends. ... As time went on ... other West Enders ... introduced me to relatives and friends, although most of the social gatherings at which I participated were those of our first contact and their circle" (1962, pp. 340–41; emphasis supplied). Thus, his account of cohesive groups is not inconsistent with overall fragmentation.</div>
+  <div class="zh">西区的社会结构真的可能是这种样子吗？首先要注意：尽管所假设的结构按定义是极度碎片化的，但这只有从宏观层次、从网络的"鸟瞰图"上才看得出来；在局部呈现出来的现象却是凝聚力。（Davis [1967] 在一个相关的语境中也注意到了这一悖论。）一位通过参与观察来研究这类群体的分析者，可能永远看不到碎片化的程度，尤其是当这些派系并未被族裔、文化或其他可见的差异标示出来时。参与观察的性质本身就容易使人陷入一个相当狭窄的圈子：研究者获得少数几个有用的联系人，并依赖他们把自己引荐给他人。甘斯写道，"进入西区社会的问题尤其棘手"。但最终，他和妻子"受到了我们一位邻居的欢迎，并与他们成了朋友。结果，他们邀请我们参加他们的许多晚间聚会，并把我们介绍给其他邻居、亲戚和朋友。……随着时间的推移……其他西区居民……把我介绍给他们的亲戚和朋友，尽管我参加的大多数社交聚会，都是我们第一位接触者及其圈子的聚会"（1962, pp. 340–41；着重号为原文所加）。因此，他关于内聚性群体的描述，与整体的碎片化并不矛盾。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Now, suppose that all ties in the West End were either strong or absent, and that the triad of figure 1 did not occur. Then, for any ego, all his friends were friends of one another, and all their friends were ego's friends as well. Unless each person was strongly tied to all others in the community, network structure did indeed break down into the isolated cliques posited above. (In terms of Davis's mathematical treatment, the overall network was "clusterable," with unique clusters [1967, p. 186].) Since it is unlikely that anyone could sustain more than a few dozen strong ties, this would, in fact, have been the result.</div>
+  <div class="zh">现在，假设西区中的所有关系要么强要么缺失，且图 1 的三元组不出现。那么，对任何一个自我而言，他所有的朋友彼此都是朋友，而这些朋友的所有朋友也都是自我的朋友。除非每个人都与社区中的所有其他人有强关系，否则网络结构确实就会瓦解为上文所假定的那些孤立的派系。（用戴维斯的数学处理来说，整个网络是"可聚类的"（clusterable），并具有唯一的簇 [1967, p. 186]。）由于任何人都不大可能维持超过几十条的强关系，这事实上就会成为结果。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Did strong ties take up enough of the West Enders' social time to make this analysis even approximately applicable? Gans reported that "sociability is a routinized gathering of a relatively unchanging peer group of family members and friends that takes place several times a week." Some "participate in informal cliques and in clubs made up of unrelated people. ... In number, and in the amount of time devoted to them, however, these groups are much less important than the family circle" (1962, pp. 74, 80). Moreover, two common sources of weak ties, formal organizations and work settings, did not provide them for the West End; organization membership was almost nil (pp. 104–7) and few worked within the area itself, so that ties formed at work were not relevant to the community (p. 122).</div>
+  <div class="zh">强关系是否占据了西区居民社交时间的足够份额，从而使这一分析至少近似地适用？甘斯报告说："社交活动是一种常规化的聚会，参与者是相对固定的、由家庭成员和朋友构成的同辈群体，每周聚会数次。"有些人"参与由无亲属关系的人组成的非正式派系与俱乐部……然而，无论在数量上，还是在投入于其中的时间上，这些群体都远不如家庭圈子重要"（1962, pp. 74, 80）。此外，弱关系的两个常见来源——正式组织与工作场所——在西区也未能提供弱关系：组织成员身份几乎为零（pp. 104–7），而且很少有人在该地区内部工作，因此在工作中形成的关系与社区无关（p. 122）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Nevertheless, in a community marked by geographic immobility and lifelong friendships (p. 19) it strains credulity to suppose that each person would not have known a great many others, so that there would have been some weak ties. The question is whether such ties were bridges.<span class="note">20 See Jane Jacobs's excellent, intuitive, discussion of bridging ties ("hop-skip links") in community organization (1961, chap. 6).｜注20：参见简·雅各布斯（Jane Jacobs）关于社区组织中架桥性关系（"跳跃式连接"，hop-skip links）的出色而直觉的讨论（1961, 第6章）。</span> If none were, then the community would be fragmented in exactly the same way as described above, except that the cliques would then contain weak as well as strong ties. (This follows, again, from Davis's analysis of "clusterability," with strong and weak ties called "positive" and absent ones "negative" [1967].) Such a pattern is made plausible by the lack of ways in the West End to develop weak ties other than by meeting friends of friends (where "friend" includes relatives)—in which case the new tie is automatically not a bridge. It is suggested, then, that for a community to have many weak ties which bridge, there must be several distinct ways or contexts in which people may form them.</div>
+  <div class="zh">然而，在一个以地理上的不流动和终身友谊为特征的社区中（p. 19），若假定每个人都不认识很多其他人，从而根本不存在弱关系，那就难以令人置信了。问题在于：这类关系是否是桥。<span class="note">注20：参见简·雅各布斯（Jane Jacobs）关于社区组织中架桥性关系（"跳跃式连接"，hop-skip links）的出色而直觉的讨论（1961, 第6章）。</span>如果它们都不是桥，那么这个社区就会以与上文所描述的完全相同的方式碎片化，只不过此时的派系中既包含强关系，也包含弱关系。（这同样可以从戴维斯对"可聚类性"的分析中推出，其中强关系与弱关系被称为"正向的"，而缺失的关系被称为"负向的" [1967]。）这样一种模式之所以显得合理，是因为在西区，除了通过认识朋友的朋友（此处"朋友"包括亲戚）之外，几乎没有其他发展弱关系的途径——而在这种情况下，新形成的关系自动就不是桥。由此可以提出：一个社区要拥有大量具架桥作用的弱关系，就必须存在若干彼此不同的途径或情境，供人们在其中形成这类关系。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The case of Charlestown, a working-class community which successfully organized against the urban renewal plan of the same city (Boston) against which the West End was powerless, is instructive in this respect: unlike the West End, it had a rich organizational life, and most male residents worked within the area (Keyes 1969, chap. 4).</div>
+  <div class="zh">查尔斯顿（Charlestown）的案例在这方面颇有启发：这是一个工人阶级社区，它成功地组织起来，抵制了同一个城市（波士顿）的城市更新计划——而面对同一计划，西区却无能为力。与西区不同，查尔斯顿拥有丰富的组织生活，而且大多数男性居民都在该地区内部工作（Keyes 1969, 第4章）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">In the absence of actual network data, all this is speculation. The hard information needed to show either that the West End was fragmented or that communities which organized successfully were not, and that both patterns were due to the strategic role of weak ties, is not at hand and would not have been simple to collect. Nor has comparable information been collected in any context. But a theoretical framework has, at least, been suggested, with which one could not only carry out analyses post hoc, but also predict differential capacity of communities to act toward common goals. A rough principle with which to begin such an investigation might be: the more local bridges (per person?) in a community and the greater their degree, the more cohesive the community and the more capable of acting in concert. Study of the origins and nature (strength and content, for example) of such bridging ties would then offer unusual insight into the social dynamics of the community.</div>
+  <div class="zh">在缺乏实际网络数据的情况下，所有这些都只是推测。要证明西区是碎片化的，或者证明那些成功组织起来的社区并非如此，并且证明这两种模式都源于弱关系的战略性作用，所需要的硬信息目前并不具备，而且收集起来也并不简单。在任何其他情境中，也未曾收集过可比的信息。但至少，我们已经提出了一个理论框架；借助它，人们不仅可以进行事后分析，还可以预测不同社区为共同目标而行动的能力差异。用以开启这样一项研究的一条粗略原则或许是：一个社区中的局部桥（人均？）越多、其度数越高，该社区就越有凝聚力，也就越有能力采取一致的行动。进而，对这类架桥性关系的起源与性质（例如其强度与内容）的研究，将为理解社区的社会动力学提供非同寻常的洞见。</div>
+</div>
+
+<!-- 5. MICRO AND MACRO NETWORK MODELS -->
+<div class="section-label">Section 5 · 第五节</div>
+<h2>MICRO AND MACRO NETWORK MODELS<span class="zh">微观与宏观网络模型</span></h2>
+
+<div class="pair">
+  <div class="en">Unlike most models of interpersonal networks, the one presented here is not meant primarily for application to small, face-to-face groups or to groups in confined institutional or organizational settings. Rather, it is meant for linkage of such small-scale levels with one another and with larger, more amorphous ones. This is why emphasis here has been placed more on weak ties than on strong. Weak ties are more likely to link members of different small groups than are strong ones, which tend to be concentrated within particular groups.</div>
+  <div class="zh">与大多数人际网络模型不同，本文所提出的模型，其主要用途并不在于应用于面对面交往的小群体，或处于封闭的制度性、组织性设置中的群体。相反，它的用途在于把这类小规模层次彼此连接起来，并把它们与更大、更无定形的层次连接起来。这正是本文把重点更多地放在弱关系而非强关系上的原因。与强关系相比，弱关系更有可能把不同小群体的成员连接起来；而强关系则往往集中在特定的群体内部。</div>
+</div>
+
+<div class="pair">
+  <div class="en">For this reason, my discussion does not lend itself to elucidation of the internal structure of small groups. This point can be made more clearly by contrasting the model of this paper to one with which it shares many similarities, that of James Davis, Paul Holland, and Samuel Leinhardt (hereafter, the DHL model) (Davis 1970; Davis and Leinhardt 1971; Holland and Leinhardt 1970, 1971a, 1971b; Davis, Holland, and Leinhardt 1971; Leinhardt 1972). The authors, inspired by certain propositions in George Homans's <em>The Human Group</em> (1950), argue that "the central proposition in structural sociometry is this: Interpersonal choices tend to be transitive—if P chooses O and O chooses X, then P is likely to choose X" (Davis et al. 1971, p. 309). When this is true without exception, a sociogram can be divided into cliques in which every individual chooses every other; any asymmetric choices or nonchoices are between such cliques, and asymmetry, if present, runs only in one direction. A partial ordering of cliques may thus be inferred. If mutual choice implies equal, and asymmetric choice unequal, status, then this ordering reflects the stratification structure of the group (Holland and Leinhardt 1971a, pp. 107–14).</div>
+  <div class="zh">由于这一原因，我的讨论并不适用于阐明小群体的内部结构。把本文的模型与另一个与之有诸多相似之处的模型——詹姆斯·戴维斯、保罗·霍兰德与塞缪尔·莱因哈特的模型（下文简称 DHL 模型）——加以对照，可以把这一点说得更清楚（Davis 1970; Davis and Leinhardt 1971; Holland and Leinhardt 1970, 1971a, 1971b; Davis, Holland, and Leinhardt 1971; Leinhardt 1972）。这些作者受乔治·霍曼斯《人类群体》（<em>The Human Group</em>, 1950）中某些命题的启发，主张"结构社会计量学的中心命题是这样：人际选择倾向于具有传递性——如果 P 选择 O，O 选择 X，那么 P 很可能选择 X"（Davis et al. 1971, p. 309）。当这一点毫无例外地成立时，一张社会关系图就可以被划分为若干派系，其中每个人都选择其他每个人；任何不对称的选择或未作的选择都发生在这类派系之间，而且不对称（如果存在的话）只沿一个方向运行。由此可以推断出派系之间的一个偏序（partial ordering）。如果互相选择意味着地位相等、而不对称选择意味着地位不等，那么这一排序就反映了群体的分层结构（Holland and Leinhardt 1971a, pp. 107–14）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">One immediate difference between this model and mine is that it is cast in terms of "choices" rather than ties. Most sociometric tests ask people whom they like best or would prefer to do something with, rather than with whom they actually spend time. If transitivity is built more into our cognitive than our social structure, this method might overstate its prevalence. But since the DHL model could recast in terms of ties, this is not a conclusive difference.</div>
+  <div class="zh">这一模型与我的模型之间一个直接的区别在于：它是用"选择"而非关系来表述的。大多数社会计量测验询问的是人们最喜欢谁、或最愿意与谁一起做某事，而不是他们实际与谁共度时光。如果传递性更多地被建构在我们的认知结构之中，而非社会结构之中，那么这一方法就可能高估传递性的普遍程度。不过，由于 DHL 模型可以用关系来重新表述，这并不是一个决定性的区别。</div>
+</div>
+
+<div class="pair">
+  <div class="en">More significant is the difference in the application of my argument to transitivity. Let P choose O and O choose X (or equivalently, let X choose O and O choose P): then I assert that transitivity—P choosing X (or X, P)—is most likely when both ties—P-O and O-X—are strong, least likely when both are weak, and of intermediate probability if one is strong and one weak. Transitivity, then, is claimed to be a function of the strength of ties, rather than a general feature of social structure.</div>
+  <div class="zh">更为重要的区别，在于我的论证在传递性问题上的应用方式。令 P 选择 O、O 选择 X（或者等价地，令 X 选择 O、O 选择 P）：那么我要断言的是，传递性——即 P 选择 X（或 X 选择 P）——在 P-O 与 O-X 两条关系都为强时最可能出现，在二者都为弱时最不可能出现，而在一强一弱时具有中等概率。由此可见，传递性被主张为关系强度的函数，而非社会结构的一般特征。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The justification of this assertion is, in part, identical with that offered earlier for the triad designated A-B-C. In addition, it is important to point out here that the DHL model was designed for small groups, and with increasing size of the group considered the rationale for transitivity weakens. If P chooses O and O chooses X, P should choose X out of consistency; but if P does not know or barely knows X, nonchoice implies no inconsistency. For the logic of transitivity to apply, a group must be small enough so that any person knows enough about every other person to be able to decide whether to "choose" him, and encounters him often enough that he feels the need for such a decision. Including weak ties in my model, then, lessens the expectation of transitivity and permits analysis of intergroup relationships and also of amorphous chunks of social structure which an analyst may ferret out as being of interest, but which are not easily defined in terms of face-to-face groups. Anthropologists have recently referred to such chunks as "quasi-groups" (Mayer 1966; Boissevain 1968).</div>
+  <div class="zh">对这一论断的辩护，有一部分与前文就 A-B-C 三元组所作的辩护相同。此外，这里需要指出的重要一点是：DHL 模型是为小群体设计的，而随着所考察群体规模的增大，传递性的理据就会减弱。如果 P 选择 O、O 选择 X，那么出于一致性，P 应当选择 X；但如果 P 不认识 X 或几乎不认识 X，那么不作选择并不蕴含任何不一致。要让传递性的逻辑成立，一个群体必须小到这样的程度：任何人对其他每一个人都了解得足够多，足以决定是否"选择"他；并且与他碰面的频率足够高，以至于感到有必要作出这一决定。因此，在我的模型中纳入弱关系，会降低对传递性的预期，并使得分析群体间关系成为可能，也使得分析那些分析者可能挖掘出来、认为值得关注、却难以用面对面群体来界定的无定形的社会结构块成为可能。人类学家近来把这类结构块称为"准群体"（quasi-groups）（Mayer 1966; Boissevain 1968）。</div>
+</div>
+
+<div class="pair">
+  <div class="en">Since, as I have argued above, weak ties are poorly represented in sociograms, there is little in the DHL empirical studies—which apply statistical tests to sociometric data—to confirm or disconfirm my argument on transitivity. One finding does lend itself to speculation, however. Leinhardt (1972) shows that the sociograms of schoolchildren conform more and more closely to the transitive model as they become older, sixth graders being the oldest tested. He interprets this as reflecting cognitive development—increasing capacity to make use of transitive logic. If my assertion is correct, an alternative possibility would be that children develop stronger ties with increasing age. This is consistent with some theories of child development (see especially Sullivan 1953, chap. 16) and would imply, on my argument, greater transitivity of structure. Some support for this explanation comes from Leinhardt's finding that proportion of choices which were mutual was positively correlated with both grade level and degree of transitivity. In these sociograms, with an average of only about four choices per child, it seems likely that most mutual choices reflected strong ties (see n. 7, above).</div>
+  <div class="zh">由于（正如我上文所论证的）弱关系在社会关系图中表征得很不充分，在 DHL 的那些经验研究——它们把统计检验应用于社会计量数据——之中，几乎没有多少东西能够证实或证伪我关于传递性的论证。不过，有一项发现确实引人遐想。莱因哈特（Leinhardt, 1972）表明，随着学童年龄的增长（其所测试的最高年级为六年级），他们的社会关系图越来越贴合传递性模型。他把这一点解释为认知发展的反映——即运用传递性逻辑的能力在增强。如果我的论断是正确的，另一种可能性就是：儿童随着年龄增长而发展出更强的关系。这与某些儿童发展理论相一致（尤其见 Sullivan 1953, 第16章），并且按照我的论证，将意味着结构具有更强的传递性。为这一解释提供若干支持的是莱因哈特的另一发现：互选所占的比例，与年级水平以及传递性程度都呈正相关。在这些社会关系图中，每个儿童平均只有约四个选择，因此大多数互选很可能反映的正是强关系（见上文注 7）。</div>
+</div>
+
+<!-- 6. CONCLUSION -->
+<div class="section-label">Section 6 · 第六节</div>
+<h2>CONCLUSION<span class="zh">结论</span></h2>
+
+<div class="pair">
+  <div class="en">The major implication intended by this paper is that the personal experience of individuals is closely bound up with larger-scale aspects of social structure, well beyond the purview or control of particular individuals. Linkage of micro and macro levels is thus no luxury but of central importance to the development of sociological theory. Such linkage generates paradoxes: weak ties, often denounced as generative of alienation (Wirth 1938) are here seen as indispensable to individuals' opportunities and to their integration into communities; strong ties, breeding local cohesion, lead to overall fragmentation. Paradoxes are a welcome antidote to theories which explain everything all too neatly.</div>
+  <div class="zh">本文想要传达的主要意涵是：个体的个人经验，与社会结构中那些远远超出特定个体的视野或控制范围的更大规模的方面，紧密地纠缠在一起。因此，微观层次与宏观层次的连接绝非可有可无的奢侈品，而是社会学理论发展的核心要务。这种连接会产生出悖论：弱关系——常被斥为产生疏离（alienation）的根源（Wirth 1938）——在这里却被看作是个体的机会、以及个体融入社区所不可或缺的；而强关系在培育局部凝聚力的同时，却导致了整体的碎片化。对于那种把一切都解释得过于井井有条的理论而言，悖论是一剂受欢迎的解药。</div>
+</div>
+
+<div class="pair">
+  <div class="en">The model offered here is a very limited step in the linking of levels; it is a fragment of a theory. Treating only the strength of ties ignores, for instance, all the important issues involving their content. What is the relation between strength and degree of specialization of ties, or between strength and hierarchical structure? How can "negative" ties be handled? Should tie strength be developed as a continuous variable? What is the developmental sequence of network structure over time?</div>
+  <div class="zh">本文所提供的模型，在连接各个层次的努力中只是非常有限的一步；它只是理论的一个片段。例如，仅仅处理关系的强度，就忽略了所有涉及关系内容的重要议题。关系的强度与其专门化程度之间是什么关系？强度与等级结构之间又是什么关系？"负向"关系应当如何处理？关系强度是否应当被发展为一个连续变量？网络结构随时间的演化序列又是怎样的？</div>
+</div>
+
+<div class="pair">
+  <div class="en">As such questions are resolved, others will arise. Demography, coalition structure, and mobility are just a few of the variables which would be of special importance in developing micro-macro linkage with the help of network analysis; how these are related to the present discussion needs specification. My contribution here is mainly, then, exploratory and programmatic, its primary purpose being to generate interest in the proposed program of theory and research.</div>
+  <div class="zh">随着这些问题得到解决，新的问题又会出现。人口构成、联盟结构与流动，只是借助网络分析来发展微观—宏观连接时具有特殊重要性的变量中的少数几个；它们与本文讨论之间的关系，需要加以明确说明。因此，我在这里的贡献主要是探索性的与纲领性的，其首要目的在于引起人们对所提出的理论与研究的纲领的兴趣。</div>
+</div>
+
+<!-- REFERENCES -->
+<div class="section-label">References · 参考文献</div>
+<p class="refs-zh-note">以下为原文参考文献，按学术惯例保留原文格式（不作翻译）。</p>
+<ol class="refs">
+  <li>Barnes, J. A. 1969. "Networks and Political Process." In <em>Social Networks in Urban Situations</em>, edited by J. C. Mitchell. Manchester: Manchester University Press.</li>
+  <li>Becker, Marshall. 1970. "Sociometric Location and Innovativeness." <em>American Sociological Review</em> 35 (April): 267–82.</li>
+  <li>Berscheid, E., and E. Walster. 1969. <em>Interpersonal Attraction</em>. Reading, Mass.: Addison-Wesley.</li>
+  <li>Boissevain, J. 1968. "The Place of Non-Groups in the Social Sciences." <em>Man</em> 3 (December): 542–56.</li>
+  <li>Bott, Elizabeth. 1957. <em>Family and Social Network</em>. London: Tavistock.</li>
+  <li>Bramel, D. 1969. "Interpersonal Attraction, Hostility and Perception." In <em>Experimental Social Psychology</em>, edited by Judson Mills. New York: Macmillan.</li>
+  <li>Brown, David. 1967. <em>The Mobile Professors</em>. Washington, D.C.: American Council on Education.</li>
+  <li>Brown, Roger. 1965. <em>Social Psychology</em>. New York: Free Press.</li>
+  <li>Coleman, J. S. 1960. "The Mathematical Study of Small Groups." In <em>Mathematical Thinking in the Measurement of Behavior</em>, edited by H. Solomon. Glencoe: Free Press.</li>
+  <li>Coleman, J. S., E. Katz, and H. Menzel. 1966. <em>Medical Innovation: A Diffusion Study</em>. Indianapolis: Bobbs-Merrill.</li>
+  <li>Dahl, Robert. 1961. <em>Who Governs?</em> New Haven, Conn.: Yale University Press.</li>
+  <li>Davies, J. C. 1966. <em>Neighborhood Groups and Urban Renewal</em>. New York: Columbia University Press.</li>
+  <li>Davis, James A. 1963. "Structural Balance, Mechanical Solidarity and Interpersonal Relations." <em>American Journal of Sociology</em> 68 (January): 444–62.</li>
+  <li>———. 1967. "Clustering and Structural Balance in Graphs." <em>Human Relations</em> 20 (May): 181–87.</li>
+  <li>———. 1969. "Social Structures and Cognitive Structures." In <em>Theories of Cognitive Consistency</em>, edited by R. P. Abelson et al. Chicago: Rand McNally.</li>
+  <li>———. 1970. "Clustering and Hierarchy in Interpersonal Relations." <em>American Sociological Review</em> 35 (October): 843–52.</li>
+  <li>Davis, James A., P. Holland, and S. Leinhardt. 1971. "Comment." <em>American Sociological Review</em> 36 (April): 309–11.</li>
+  <li>Davis, James A., and S. Leinhardt. 1971. "The Structure of Positive Interpersonal Relations in Small Groups." In <em>Sociological Theories in Progress</em>. Vol. 2, edited by J. Berger, M. Zelditch, and B. Anderson. Boston: Houghton-Mifflin.</li>
+  <li>Epstein, A. 1969. "The Network and Urban Social Organization." In <em>Social Networks in Urban Situations</em>, edited by J. C. Mitchell. Manchester: Manchester University Press.</li>
+  <li>Frankenberg, R. 1965. <em>Communities in Britain</em>. Baltimore: Penguin.</li>
+  <li>Gans, Herbert. 1962. <em>The Urban Villagers</em>. New York: Free Press.</li>
+  <li>Granovetter, M. S. 1970. "Changing Jobs: Channels of Mobility Information in a Suburban Community." Doctoral dissertation, Harvard University.</li>
+  <li>Harary, F. 1965. "Graph Theory and Group Structure." In <em>Readings in Mathematical Psychology</em>. Vol. 2, edited by R. Luce, R. Bush, and E. Galanter. New York: Wiley.</li>
+  <li>Harary, F., R. Norman, and D. Cartwright. 1965. <em>Structural Models</em>. New York: Wiley.</li>
+  <li>Heider, F. 1958. <em>The Psychology of Interpersonal Relations</em>. New York: Wiley.</li>
+  <li>Holland, Paul, and S. Leinhardt. 1970. "Detecting Structure in Sociometric Data." <em>American Journal of Sociology</em> 76 (November): 492–513.</li>
+  <li>———. 1971a. "Transitivity in Structural Models of Small Groups." <em>Comparative Group Studies</em> 2:107–24.</li>
+  <li>———. 1971b. "Masking: The Structural Implications of Measurement Error in Sociometry." Mimeographed. Pittsburgh: Carnegie-Mellon University.</li>
+  <li>Homans, George. 1950. <em>The Human Group</em>. New York: Harcourt, Brace &amp; World.</li>
+  <li>Jacobs, Jane. 1961. <em>The Death and Life of Great American Cities</em>. New York: Random House.</li>
+  <li>Kapferer, B. 1969. "Norms and the Manipulation of Relationships in a Work Context." In <em>Social Networks in Urban Situations</em>, edited by J. C. Mitchell. Manchester: Manchester University Press.</li>
+  <li>Katz, E., and P. Lazarsfeld. 1955. <em>Personal Influence</em>. New York: Free Press.</li>
+  <li>Kerckhoff, A., and K. Back. 1968. <em>The June Bug: A Study of Hysterical Contagion</em>. New York: Appleton-Century-Crofts.</li>
+  <li>Kerckhoff, A., K. Back, and N. Miller. 1965. "Sociometric Patterns in Hysterical Contagion." <em>Sociometry</em> 28 (March): 2–15.</li>
+  <li>Keyes, L. C. 1969. <em>The Rehabilitation Planning Game</em>. Cambridge, Mass.: M.I.T. Press.</li>
+  <li>Korte, Charles. 1967. "Small-World Study (Los Angeles): Data Analysis." Mimeographed. Poughkeepsie, N.Y.: Vassar College.</li>
+  <li>Korte, Charles, and Stanley Milgram. 1970. "Acquaintance Networks between Racial Groups." <em>Journal of Personality and Social Psychology</em> 15 (June): 101–8.</li>
+  <li>Laumann, Edward. 1968. "Interlocking and Radial Friendship Networks: A Cross-sectional Analysis." Mimeographed. Ann Arbor: University of Michigan.</li>
+  <li>Laumann, Edward, and H. Schuman. 1967. "Open and Closed Structures." Paper prepared for the 1967 ASA meeting. Mimeographed.</li>
+  <li>Leinhardt, Samuel. 1972. "Developmental Change in the Sentiment Structure of Children's Groups." <em>American Sociological Review</em> 37 (April): 202–12.</li>
+  <li>Mayer, Adrian. 1966. "The Significance of Quasi-Groups in the Study of Complex Societies." In <em>The Social Anthropology of Complex Societies</em>, edited by M. Banton. New York: Praeger.</li>
+  <li>Mayer, Philip. 1961. <em>Townsmen or Tribesmen?</em> Capetown: Oxford.</li>
+  <li>Mazur, B. 1971. "Comment." <em>American Sociological Review</em> 36 (April): 308–9.</li>
+  <li>Milgram, Stanley. 1967. "The Small-World Problem." <em>Psychology Today</em> 1 (May): 62–67.</li>
+  <li>Mitchell, J. Clyde. 1969. <em>Social Networks in Urban Situations</em>. Manchester: Manchester University Press.</li>
+  <li>Newcomb, T. M. 1961. <em>The Acquaintance Process</em>. New York: Holt, Rinehart &amp; Winston.</li>
+  <li>Parnes, Herbert. 1954. <em>Research on Labor Mobility</em>. New York: Social Science Research Council.</li>
+  <li>Precker, Joseph. 1952. "Similarity of Valuings as a Factor in Selection of Peers and Near-Authority Figures." <em>Journal of Abnormal and Social Psychology</em> 47, suppl. (April): 406–14.</li>
+  <li>Rapoport, Anatol. 1953a. "Spread of Information through a Population with Socio-Structural Bias. I. Assumption of Transitivity." <em>Bulletin of Mathematical Biophysics</em> 15 (December): 523–33.</li>
+  <li>———. 1953b. "Spread of Information through a Population with Socio-Structural Bias. II. Various Models with Partial Transitivity." <em>Bulletin of Mathematical Biophysics</em> 15 (December): 535–46.</li>
+  <li>———. 1954. "Spread of Information through a Population with Socio-Structural Bias. III. Suggested Experimental Procedures." <em>Bulletin of Mathematical Biophysics</em> 16 (March): 75–81.</li>
+  <li>———. 1963. "Mathematical Models of Social Interaction." In <em>Handbook of Mathematical Psychology</em>. Vol. 2, edited by R. Luce, R. Bush, and E. Galanter. New York: Wiley.</li>
+  <li>Rapoport, A., and W. Horvath. 1961. "A Study of a Large Sociogram." <em>Behavioral Science</em> 6:279–91.</li>
+  <li>Rogers, Everett. 1962. <em>Diffusion of Innovations</em>. New York: Free Press.</li>
+  <li>Shapero, Albert, Richard Howell, and James Tombaugh. 1965. <em>The Structure and Dynamics of the Defense R &amp; D Industry</em>. Menlo Park, Calif.: Stanford Research Institute.</li>
+  <li>Simmel, Georg. 1950. <em>The Sociology of Georg Simmel</em>. New York: Free Press.</li>
+  <li>Solomonoff, Ray, and A. Rapoport. 1951. "Connectivity of Random Nets." <em>Bulletin of Mathematical Biophysics</em> 13 (June): 107–17.</li>
+  <li>Sullivan, Harry Stack. 1953. <em>The Interpersonal Theory of Psychiatry</em>. New York: Norton.</li>
+  <li>Tilly, Charles. 1969. "Community: City: Urbanization." Mimeographed. Ann Arbor: University of Michigan.</li>
+  <li>Travers, Jeffrey, and S. Milgram. 1969. "An Experimental Study of the 'Small-World' Problem." <em>Sociometry</em> 32 (December): 425–43.</li>
+  <li>Wirth, Louis. 1938. "Urbanism as a Way of Life." <em>American Journal of Sociology</em> 44 (July): 1–24.</li>
+</ol>
+
+<footer>
+  Source: Granovetter, M. S. (1973). The Strength of Weak Ties. <em>American Journal of Sociology</em>, 78(6), 1360–1380. DOI: 10.1086/225469.<br>
+  英文原文由源 PDF（JSTOR 扫描件）OCR 提取，已剔除 JSTOR 页眉页脚水印、页码与脚注分隔线；正文按阅读顺序重排并逐段提供中文对照；脚注以小字注文形式保留并译出；参考文献保留原文格式。仅供学习交流使用。
+</footer>
+
+</div>
+</body>
+</html>

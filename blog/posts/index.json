@@ -1,6 +1,11 @@
 {
   "posts": [
     {
+      "date": "2026-09-06",
+      "file": "day02_granovetter1973_weak_ties.html",
+      "title": "The Strength of Weak Ties / 弱关系的力量 — Granovetter, AJS 1973"
+    },
+    {
       "date": "2026-09-05",
       "file": "2026-09-05-lazer2009_computational_social_science.html",
       "title": "Computational Social Science / 计算社会科学 — Lazer et al., Science 2009"
